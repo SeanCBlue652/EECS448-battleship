@@ -13,7 +13,7 @@ class executive {
 
     /**
 	  *	@pre:	None
-	  *	@post:
+	  *	@post: Prints 50 newlines to the terminal in order to move previous messages out of sight
 	  *	@param: None
 	  */
     public static void clearTerminal() {
