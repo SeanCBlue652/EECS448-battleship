@@ -1,7 +1,10 @@
-public class executive {
+import java.util.Scanner;
+
+class executive {
     public String helloWorld() {
         return("Hello world!");
     }
+    
 }
 
 //SET-UP--------------------------------------------------------------------------------------------------------------------------------
