@@ -1,8 +1,25 @@
 import java.util.Scanner;
 
 class executive {
+
+    /**
+	  *	@pre:	None
+	  *	@post: Prints "Hello World". This method provides an example to the team of how to call methods from other classes in Java.
+	  *	@param: None
+	  */
     public static void helloWorld() {
       System.out.println("Hello world!");
+    }
+
+    /**
+	  *	@pre:	None
+	  *	@post:
+	  *	@param: None
+	  */
+    public static void clearTerminal() {
+      for (int i = 0; i < 50; i++) {
+        System.out.println("");
+      }
     }
     
 }
