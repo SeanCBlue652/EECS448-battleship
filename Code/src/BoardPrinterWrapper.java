@@ -45,7 +45,7 @@ public class BoardPrinterWrapper{
     this.indexed = t_indexed;
 
     this.g = t_g;
-    this.ui = new Board(g.getXSize() + this.indexOffset, g.getYSize() + this.indexOffset, this.board_marker);
+    this.ui = new Board(g.getXSize() + this.indexOffset + 2 * this.xOffset, g.getYSize() + 2 * this.indexOffset + this.yOffset, this.board_marker);
 
   }
 
@@ -60,8 +60,8 @@ public class BoardPrinterWrapper{
       char x_ui = '0';
       char y_ui = 'A';
 
-      xInput = this.xOffset + (1 * (this.xOffset + g.getXSize())) + (1+1) * this.indexOffset;
-      yInput = this.yOffset + (1 * (this.yOffset + g.getYSize())) + (1+1) * this.indexOffset;
+      xInput = this.xOffset + (0 * (this.xOffset + g.getXSize())) + (0+1) * this.indexOffset;
+      yInput = this.yOffset + (0 * (this.yOffset + g.getYSize())) + (0+1) * this.indexOffset;
       for(int i = -1; i < g.getYSize(); i++){
         for(int k = -1; k < g.getXSize(); k++){
           if(i == -1 && indexed){
@@ -75,8 +75,8 @@ public class BoardPrinterWrapper{
         }
       }
 
-      xInput = this.xOffset + (1 * (this.xOffset + g.getXSize())) + (1+1) * this.indexOffset;
-      yInput = this.yOffset + (1 * (this.yOffset + g.getYSize())) + (1+1) * this.indexOffset;
+      xInput = this.xOffset + (0 * (this.xOffset + g.getXSize())) + (0+1) * this.indexOffset;
+      yInput = this.yOffset + (0 * (this.yOffset + g.getYSize())) + (0+1) * this.indexOffset;
       for(int i = 0; i < g.getYSize(); i++){
         for(int k = 0; k < g.getXSize(); k++){
             ui.addMarker(g.getMarker(k, i), xInput + k, yInput + i);
