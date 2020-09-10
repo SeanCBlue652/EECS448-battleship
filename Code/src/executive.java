@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 class executive {
-    public String helloWorld() {
-        return("Hello world!");
+    public static void helloWorld() {
+      System.out.println("Hello world!");
     }
     
 }
