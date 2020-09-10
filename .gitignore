@@ -1,7 +1,2 @@
 .vscode/
-/Code/src/Battleship.class
-/Code/src/Board.class
-/Code/src/BoardHandler.class
-/Code/src/BoardInterface.class
-/Code/src/CollisionHandler.class
-/Code/src/executive.class
+*.class
