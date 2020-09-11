@@ -1,4 +1,4 @@
-import java.until.Scanner
+import java.util.Scanner;
 public class shot
 {
     public static void main (String [] arg)
