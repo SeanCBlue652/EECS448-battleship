@@ -3,13 +3,14 @@ public class shot
 {
     public static void main (String [] arg)
     {
+        Board ();
         Scanner sc = new Scanner(System.in);
         System.out.print ("Input your x axis of your shoting: ");
-        int x =sc.nextInt();
+        x =sc.nextInt();
         System.out.print ("Input your y axis of your shoting: ");
-        int y =sc.nextInt();
-        Board[i][j]=0;//From Board function 
-        ship[i][j]=0;//From ship functtion
+        y =sc.nextInt();
+        Board[x][y]=0; 
+        ship[x][y]=0;//From ship functtion
         for (int i=0;i<9;i++)
         {
             for (int j=0;j<9;j++)
@@ -28,8 +29,8 @@ public class shot
         {
             for (int j=0;j<9;j++)
             {
-                i = x;
-                j = y;
+                i = y;
+                j = x;
                 if(Board[i][j]==1)
                 {
                     System.out.print ("X");//X mean hit
