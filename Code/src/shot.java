@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class shot
 {
-    public static void main (String [] arg)
+    public static void  shot (String [] arg)
     {
         Board ();
         Scanner sc = new Scanner(System.in);
