@@ -57,8 +57,8 @@ public class BoardPrinterWrapper{
       int xInput = 0;
       int yInput = 0;
 
-      char x_ui = '0';
-      char y_ui = 'A';
+      char x_ui = '@';
+      char y_ui = '1';
 
       xInput = this.xOffset + (0 * (this.xOffset + g.getXSize())) + (0+1) * this.indexOffset;
       yInput = this.yOffset + (0 * (this.yOffset + g.getYSize())) + (0+1) * this.indexOffset;
