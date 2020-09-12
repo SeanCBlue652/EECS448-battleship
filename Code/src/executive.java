@@ -287,11 +287,6 @@ class executive {
         menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
-          System.out.println("Where do you want to send your attack? (A1-I9)? ");
-          input = safelyGetCoordinates();
-          attackCol = letterToInt(input.charAt(0));
-          attackRow = Integer.parseInt(""+input.charAt(1)) - 1;
-          
           
           boolean incomplete = true;
           do {
