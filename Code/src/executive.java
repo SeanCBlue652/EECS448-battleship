@@ -237,9 +237,7 @@ class executive {
     do {
       if (i % 2 == 0)// player 1's turn
       {
-        for (int j = 0; j < 9; j++) {
-          System.out.println("---");
-        }
+        clearTerminal();
         System.out.println("It is now Player 1's turn.");
         // MENU:
         postMenu();
@@ -315,9 +313,7 @@ class executive {
 
       // player2 turn
       else {
-        for (int z = 0; z < 9; z++) {
-          System.out.println("---");
-        }
+        clearTerminal();
         // player 2's turn
         System.out.println("It is now Player 2's turn.");
         // MENU:
