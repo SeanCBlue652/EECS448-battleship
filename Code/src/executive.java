@@ -7,7 +7,7 @@ class executive {
 	  *	@post: Prints "Hello World". This method provides an example to the team of how to call methods from other classes in Java.
 	  *	@param: None
 	  */
-    public static void helloWorld() {
+    public void helloWorld() {
       System.out.println("Hello world!");
     }
 
@@ -16,7 +16,7 @@ class executive {
 	  *	@post: Prints 50 newlines to the terminal in order to move previous messages out of sight
 	  *	@param: None
 	  */
-    public static void clearTerminal() {
+    public void clearTerminal() {
       for (int i = 0; i < 50; i++) {
         System.out.println("");
       }
