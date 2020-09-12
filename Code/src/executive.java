@@ -237,7 +237,10 @@ class executive {
           }
           } while (incomplete);
           
-
+          if (playerWon(player2Board)) {
+            p1Win = true;
+            break;
+          }
           i++;
         }
         // Type "2" to review your board
@@ -317,7 +320,10 @@ class executive {
           } while (incomplete);
           
          
-
+          if (playerWon(player1Board)) {
+            p2Win = true;
+            break;
+          }
           i++;
         }
 
@@ -374,6 +380,17 @@ class executive {
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   */
+
+  private boolean playerWon(Board enemyBoard) {
+    for(int i = 0; i < 9; i++) {
+      for(int j = 0; j < 9; j++) {
+        if (enemyBoard.getMarker(i, j) == 's') {
+          return(false);
+        }
+      }
+    }
+    return(true);
+  }
 
   private boolean placeShip(Board board, int shipSize) {
     System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
