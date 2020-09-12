@@ -37,7 +37,7 @@ public class CollisionHandler {
 	*/
 	public static boolean check(Board g, char marker, int x, int y){
 		if(x < 0 || y < 0 || x >= g.getXSize() || y >= g.getYSize()){
-			return true;
+			throw new IllegalArgumentException("The proivded coordinates are out of bounds.");
 		}
 		if(g.getMarker(x, y) == marker){
 			return true;

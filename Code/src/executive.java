@@ -124,7 +124,8 @@ class executive {
   // main function
   public void run() {
     // SET-UP--------------------------------------------------------------------------------------------------------------------------------
-
+    Board player1Board = new Board(9, 9, '~');
+    Board player2Board = new Board(9, 9, '~');
     int numberOfShips = 0;
     char shipDirection;
     String input = "";
@@ -141,71 +142,28 @@ class executive {
     // 1x(1->numberOfShips)
     System.out.println("Player 2, please look away from the screen while Player 1 places their ships.");
     int tempShipRow;
-    char tempShipRowChar;
+    // char tempShipRowChar;
     int tempShipCol;
-    char tempShipColChar;
+    // char tempShipColChar;
     int tempShipSize;
     // for loop: Where does P1 want the tip of their boat (A1-I9)
     for (int i = 0; i < numberOfShips; i++) {
-      System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
-      input = safelyGetCoordinates();
-      tempShipColChar = input.charAt(0);
-      tempShipRowChar = input.charAt(1);
-      // (y-axis) column char to int
-      tempShipCol = letterToInt(tempShipColChar);
-      // (x-axis) row char to int
-      if (Character.getNumericValue(tempShipRowChar) >= 1 && Character.getNumericValue(tempShipRowChar) <= 9) // only
-                                                                                                              // proceed
-                                                                                                              // if row
-                                                                                                              // is
-                                                                                                              // valid
-      {
-        tempShipRow = Character.getNumericValue(tempShipRowChar) - 1;
-      } else {
-        break; // TODO: fix this
-      }
-      // tip must be in a valid spot
-      // if length is >1, then there must be at least one possible placement to fit
-      // the rest of the ship from the chosen spot for the ship's tip
-
-      System.out.println(
-          "Which direction do you want this ship to face ('N' for North, 'E' for East, 'S' for South, or 'W' for West)?");
-      shipDirection = getValidShipDirection();
-      // Check to see if the rest of the ship fits on the board
-      // if not, inform user and ask for another direction
-
-      // IMPORTANT
-      // NEEDS IMPLEMENTATION--use shipDirection with tempShipRow & tempShipCol to
-      // place ship, using i to check what size ship
-      // IMPORTANT
-
-      // progress through for loop for each ship
+      boolean successfulPlacement = false;
+      do {
+        successfulPlacement = placeShip(player1Board, i);
+      } while (!successfulPlacement);
     }
     // warn player 1 to now look away from the screen
 
-    for (int i = 0; i < 9; i++) {
-      System.out.println("---");
-    }
+    clearTerminal();
 
     System.out.println("It's now Player 1's turn to look away from the screen while Player 2 places their ships.");
     for (int i = 0; i < numberOfShips; i++) {
       System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
       input = safelyGetCoordinates();
-      tempShipColChar = input.charAt(0);
-      tempShipRowChar = input.charAt(1);
-      // (y-axis) column char to int
-      letterToInt(tempShipColChar);
-      // (x-axis) row char to int
-      if (Character.getNumericValue(tempShipRowChar) >= 1 && Character.getNumericValue(tempShipRowChar) <= 9) // only
-                                                                                                              // proceed
-                                                                                                              // if row
-                                                                                                              // is
-                                                                                                              // valid
-      {
-        tempShipRow = Character.getNumericValue(tempShipRowChar) - 1;
-      } else {
-        break;
-      }
+      tempShipCol = letterToInt(input.charAt(0));
+      tempShipRow = Integer.parseInt("" + input.charAt(1));
+      tempShipSize = i + 1;
       // tip must be in a valid spot
       // if length is >1, then there must be at least one possible placement to fit
       // the rest of the ship from the chosen spot for the ship's tip
@@ -407,6 +365,192 @@ class executive {
     System.out.println(" ");
 
   }
+
+  private boolean placeShip(Board board, int shipSize) {
+    System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
+    String input = safelyGetCoordinates(); // This validates the user input
+    int col = letterToInt(input.charAt(0));
+    int row = Integer.parseInt("" + input.charAt(1));
+    int size = shipSize + 1;
+
+    try {
+      if (CollisionHandler.check(board, 's', row, col)) {
+        System.out.println("The space " + col + row + " is already occupied.");
+        return (false);
+      }
+    } catch (IllegalArgumentException iae) {
+      System.out.println(iae.getMessage());
+      return (false);
+    }
+
+    int numOpenDirections = 4;
+    try {
+      if (CollisionHandler.check(board, 's', row + 1, col)) {
+        numOpenDirections--;
+      }
+    } catch (IllegalArgumentException iae) {
+      numOpenDirections--;
+    }
+    try {
+      if (CollisionHandler.check(board, 's', row - 1, col)) {
+        numOpenDirections--;
+      }
+    } catch (IllegalArgumentException iae) {
+      numOpenDirections--;
+    }
+    try {
+      if (CollisionHandler.check(board, 's', row, col + 1)) {
+        numOpenDirections--;
+      }
+    } catch (IllegalArgumentException iae) {
+      numOpenDirections--;
+    }
+    try {
+      if (CollisionHandler.check(board, 's', row, col - 1)) {
+        numOpenDirections--;
+      }
+    } catch (IllegalArgumentException iae) {
+      numOpenDirections--;
+    }
+
+    if (numOpenDirections == 0) {
+      return (false);
+    }
+
+    boolean directionSucceeded = false;
+    char shipDirection = 'z';
+
+    do {
+      System.out.println(
+          "Which direction do you want this ship to face ('N' for North, 'E' for East, 'S' for South, or 'W' for West)?");
+      shipDirection = getValidShipDirection();
+
+      switch (shipDirection) {
+        case 'n':
+          directionSucceeded = true;
+          for (int z = 0; z < size; z++) {
+            if (directionSucceeded) {
+              try {
+                if (CollisionHandler.check(board, 's', row + z, col)) {
+                  int num = row + z;
+                  System.out.println("The space " + col + num + " is already occupied. Please pick a new orientation.");
+                  directionSucceeded = false;
+                }
+              } catch (IllegalArgumentException iae) {
+                int num = row + z;
+                System.out.println("The space " + col + num + " is out of bounds. Please pick a new orientation.");
+                directionSucceeded = false;
+              }
+            }
+            if (directionSucceeded) {
+              shipDirection = 'n';
+            }
+          }
+          break;
+        case 's':
+          directionSucceeded = true;
+          for (int z = 0; z < size; z++) {
+            if (directionSucceeded) {
+              try {
+                if (CollisionHandler.check(board, 's', row - z, col)) {
+                  int num = row - z;
+                  System.out.println("The space " + col + num + " is already occupied. Please pick a new orientation.");
+                  directionSucceeded = false;
+                }
+              } catch (IllegalArgumentException iae) {
+                int num = row - z;
+                System.out.println("The space " + col + num + " is out of bounds. Please pick a new orientation.");
+                directionSucceeded = false;
+              }
+            }
+            if (directionSucceeded) {
+              shipDirection = 's';
+            }
+          }
+          break;
+        case 'w':
+          directionSucceeded = true;
+          for (int z = 0; z < size; z++) {
+            if (directionSucceeded) {
+              try {
+                if (CollisionHandler.check(board, 's', row, col - z)) {
+                  char letter = coordinateLetters[col - z];
+                  System.out
+                      .println("The space " + letter + row + " is already occupied. Please pick a new orientation.");
+                  directionSucceeded = false;
+                }
+              } catch (IllegalArgumentException iae) {
+                char letter = coordinateLetters[col - z + 1];
+                System.out.println(
+                    "The space to the west of " + letter + row + " is out of bounds. Please pick a new orientation.");
+                directionSucceeded = false;
+              }
+            }
+            if (directionSucceeded) {
+              shipDirection = 'w';
+            }
+          }
+          break;
+        case 'e':
+          directionSucceeded = true;
+          for (int z = 0; z < size; z++) {
+            if (directionSucceeded) {
+              try {
+                if (CollisionHandler.check(board, 's', row, col + z)) {
+                  char letter = coordinateLetters[col + z];
+                  System.out
+                      .println("The space " + letter + row + " is already occupied. Please pick a new orientation.");
+                  directionSucceeded = false;
+                }
+              } catch (IllegalArgumentException iae) {
+                char letter = coordinateLetters[col + z - 1];
+                System.out.println(
+                    "The space to the east of " + letter + row + " is out of bounds. Please pick a new orientation.");
+                directionSucceeded = false;
+              }
+            }
+            if (directionSucceeded) {
+              shipDirection = 'e';
+            }
+          }
+          break;
+
+        default:
+          break;
+      }
+    } while (!directionSucceeded);
+
+    switch (shipDirection) {
+      case 'n':
+        for (int i = 0; i < size; i++) {
+          board.addMarker('s', row+i, col);
+        }
+        break;
+        case 's':
+        for (int i = 0; i < size; i++) {
+          board.addMarker('s', row-i, col);
+        }
+        break;
+        case 'w':
+        for (int i = 0; i < size; i++) {
+          board.addMarker('s', row, col-i);
+        }
+        break;
+        case 'e':
+        for (int i = 0; i < size; i++) {
+          board.addMarker('s', row, col+i);
+        }
+        break;
+    
+      default:
+        break;
+    }
+
+    return(true);
+
+  }
+
+
 
   private char getValidShipDirection() {
     String userInput = "";
