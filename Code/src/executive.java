@@ -61,6 +61,24 @@ class executive {
     return (true);
   }
 
+  private int safelyGetIntInput() {
+    boolean invalidInput = true;
+    String input = "";
+    int output = 0;
+    do {
+      input = consoleInput.next();
+      try {
+        output = Integer.parseInt(input);
+        invalidInput = false;
+      } catch (NumberFormatException nfe) {
+        System.out.println("Please input an int.");
+        input = consoleInput.nextLine();
+      }
+
+    } while (invalidInput);
+    return (output);
+  }
+
   // main function
   public void run() {
     // SET-UP--------------------------------------------------------------------------------------------------------------------------------
@@ -74,13 +92,7 @@ class executive {
     // INPUT taken from user: numberOfShips (1-5)
 
     do {
-      input = consoleInput.next();
-      try {
-        numberOfShips = Integer.parseInt(input);
-      } catch (NumberFormatException nfe) {
-        System.out.println("Please input an int.");
-      }
-
+      numberOfShips = safelyGetIntInput();
     } while (validateShipNum(numberOfShips) == false);
 
     // There are numberOfShips ships to place for each player, each with ships sized
@@ -158,7 +170,7 @@ class executive {
 
       System.out.println(
           "Which direction do you want this ship to face ('N' for North, 'E' for East, 'S' for South, or 'W' for West)?");
-      shipDirection = consoleInput.nextLine().charAt(0);
+      shipDirection = getValidShipDirection();
       // Check to see if the rest of the ship fits on the board
       // if not, inform user and ask for another direction
 
@@ -176,7 +188,7 @@ class executive {
     int i = 0;
     int menuChoice;
     int attackCol;
-    int attackRow; 
+    int attackRow;
     char attackColChar;
     char attackRowChar;
 
@@ -189,7 +201,7 @@ class executive {
         System.out.println("It is now Player 1's turn.");
         // MENU:
         postMenu();
-        menuChoice = Integer.parseInt(consoleInput.next());
+        menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
           System.out.println("Where do you want to send your attack? (A1-I9)? ");
@@ -226,7 +238,7 @@ class executive {
 
           } while (consoleInput.next().toLowerCase() != "q");
           postMenu();
-          menuChoice = Integer.parseInt(consoleInput.next());
+          menuChoice = safelyGetIntInput();
         }
         // Type "3" to view your attack history
         else if (menuChoice == 3) {
@@ -241,7 +253,7 @@ class executive {
 
           } while (consoleInput.next().toLowerCase() != "q");
           postMenu();
-          menuChoice = Integer.parseInt(consoleInput.next());
+          menuChoice = safelyGetIntInput();
         }
         // Type "4" to forfeit match
         else if (menuChoice == 4) {
@@ -255,7 +267,7 @@ class executive {
         else {
           System.out.println("Sorry, that is not a valid menu option.");
           postMenu();
-          menuChoice = Integer.parseInt(consoleInput.next());
+          menuChoice = safelyGetIntInput();
         }
       }
 
@@ -268,7 +280,7 @@ class executive {
         System.out.println("It is now Player 2's turn.");
         // MENU:
         postMenu();
-        menuChoice = Integer.parseInt(consoleInput.next());
+        menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
           System.out.println("Where do you want to send your attack? (A1-I9)? ");
@@ -306,7 +318,7 @@ class executive {
             // type "Q" or "q" to display menu again
           } while (consoleInput.next().toLowerCase() != "q");
           postMenu();
-          menuChoice = Integer.parseInt(consoleInput.next());
+          menuChoice = safelyGetIntInput();
         }
 
         // Type "3" to view your attack history
@@ -322,7 +334,7 @@ class executive {
             // type "Q" or "q" to display menu again
           } while (consoleInput.next().toLowerCase() != "q");
           postMenu();
-          menuChoice = Integer.parseInt(consoleInput.next());
+          menuChoice = safelyGetIntInput();
         }
         // Type "4" to forfeit match
         else if (menuChoice == 4) {
@@ -337,7 +349,7 @@ class executive {
         else {
           System.out.println("Sorry, that is not a valid menu option.");
           postMenu();
-          menuChoice = Integer.parseInt(consoleInput.next());
+          menuChoice = safelyGetIntInput();
         }
       }
 
