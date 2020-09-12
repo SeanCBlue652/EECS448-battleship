@@ -56,6 +56,7 @@ class executive {
 
   private boolean validateShipNum(int num) {
     if (num > 5 || num < 1) {
+      System.out.println("Please input an int from 1 to 5.");
       return (false);
     }
     return (true);
@@ -125,7 +126,9 @@ class executive {
   public void run() {
     // SET-UP--------------------------------------------------------------------------------------------------------------------------------
     Board player1Board = new Board(9, 9, '~');
+    BoardPrinterWrapper player1Printer = new BoardPrinterWrapper(player1Board, 's', '~', true);
     Board player2Board = new Board(9, 9, '~');
+    BoardPrinterWrapper player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
     int numberOfShips = 0;
     char shipDirection;
     String input = "";
@@ -140,45 +143,45 @@ class executive {
 
     // There are numberOfShips ships to place for each player, each with ships sized
     // 1x(1->numberOfShips)
-    System.out.println("Player 2, please look away from the screen while Player 1 places their ships.");
+    System.out.println("Player 2, please look away from the screen while Player 1 places their ships. Input anything to continue when ready.");
+    input = consoleInput.next();
     int tempShipRow;
     // char tempShipRowChar;
     int tempShipCol;
     // char tempShipColChar;
     int tempShipSize;
     // for loop: Where does P1 want the tip of their boat (A1-I9)
+    System.out.println("Here is player 1's current board:");
+    player1Printer.print(false);
+    
     for (int i = 0; i < numberOfShips; i++) {
       boolean successfulPlacement = false;
       do {
         successfulPlacement = placeShip(player1Board, i);
+        if (!successfulPlacement) {
+          System.out.println("Here is player 1's current board:");
+          player1Printer.print(false);
+        }
       } while (!successfulPlacement);
     }
     // warn player 1 to now look away from the screen
 
     clearTerminal();
 
-    System.out.println("It's now Player 1's turn to look away from the screen while Player 2 places their ships.");
+    System.out.println("It's now Player 1's turn to look away from the screen while Player 2 places their ships. Input anything to continue when ready.");
+    input = consoleInput.next();
+    System.out.println("Here is player 2's current board:");
+    player2Printer.print(false);
+    
     for (int i = 0; i < numberOfShips; i++) {
-      System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
-      input = safelyGetCoordinates();
-      tempShipCol = letterToInt(input.charAt(0));
-      tempShipRow = Integer.parseInt("" + input.charAt(1));
-      tempShipSize = i + 1;
-      // tip must be in a valid spot
-      // if length is >1, then there must be at least one possible placement to fit
-      // the rest of the ship from the chosen spot for the ship's tip
-
-      System.out.println(
-          "Which direction do you want this ship to face ('N' for North, 'E' for East, 'S' for South, or 'W' for West)?");
-      shipDirection = getValidShipDirection();
-      // Check to see if the rest of the ship fits on the board
-      // if not, inform user and ask for another direction
-
-      // IMPORTANT
-      // NEEDS IMPLEMENTATION--use shipDirection with tempShipRow & tempShipCol to
-      // place ship, using i to check what size ship
-      // IMPORTANT
-
+      boolean successfulPlacement = false;
+      do {
+        successfulPlacement = placeShip(player2Board, i);
+        if (!successfulPlacement) {
+          System.out.println("Here is player 2's current board:");
+          player2Printer.print(false);
+        }
+      } while (!successfulPlacement);
     }
 
     // GAME
