@@ -79,6 +79,48 @@ class executive {
     return (output);
   }
 
+  private String safelyGetCoordinates() {
+    boolean invalidInput = true;
+    String input = "";
+    String output = "";
+    boolean colValid = false;
+    boolean rowValid = false;
+    char col = 'z';
+    char row = 'z';
+    do {
+      input = consoleInput.next();
+      if (input.length() < 2) {
+        System.out.println("Please input coordinates in the format: A1");
+      } else {
+        col = input.charAt(0);
+        row = input.charAt(1);
+        int temp;
+        try {
+          temp = letterToInt(col); // This will throw an IllegalArgumentException if the col letter is out of range
+          colValid = true;
+        } catch (IllegalArgumentException iae) {
+          System.out.println(iae.getMessage());
+          System.out.println("Please input coordinates within the range of A1 - I9");
+          colValid = false;
+        }
+        try {
+          temp = Integer.parseInt("" + row); // This will throw a NumberFormatException if row is not a number
+          rowValid = true;
+        } catch (NumberFormatException nfe) {
+          System.out.println(row + " is not an int.");
+          System.out.println("Please input coordinates in the format: A1.");
+          rowValid = false;
+        }
+        if (colValid && rowValid) {
+          output = "" + col + row;
+          invalidInput = false; // This line won't be reached until there are no errors
+        }
+      }
+
+    } while (invalidInput);
+    return (output);
+  }
+
   // main function
   public void run() {
     // SET-UP--------------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +148,7 @@ class executive {
     // for loop: Where does P1 want the tip of their boat (A1-I9)
     for (int i = 0; i < numberOfShips; i++) {
       System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
-      input = consoleInput.nextLine();
+      input = safelyGetCoordinates();
       tempShipColChar = input.charAt(0);
       tempShipRowChar = input.charAt(1);
       // (y-axis) column char to int
@@ -148,7 +190,7 @@ class executive {
     System.out.println("It's now Player 1's turn to look away from the screen while Player 2 places their ships.");
     for (int i = 0; i < numberOfShips; i++) {
       System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
-      input = consoleInput.nextLine();
+      input = safelyGetCoordinates();
       tempShipColChar = input.charAt(0);
       tempShipRowChar = input.charAt(1);
       // (y-axis) column char to int
@@ -205,7 +247,7 @@ class executive {
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
           System.out.println("Where do you want to send your attack? (A1-I9)? ");
-          input = consoleInput.nextLine();
+          input = safelyGetCoordinates();
           attackColChar = input.charAt(0);
           attackRowChar = input.charAt(1);
           // (y-axis) column char to int
@@ -284,7 +326,7 @@ class executive {
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
           System.out.println("Where do you want to send your attack? (A1-I9)? ");
-          input = consoleInput.nextLine();
+          input = safelyGetCoordinates();
           attackColChar = input.charAt(0);
           attackRowChar = input.charAt(1);
           // (y-axis) column char to int
