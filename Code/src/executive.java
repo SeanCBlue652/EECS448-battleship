@@ -106,7 +106,13 @@ class executive {
         }
         try {
           temp = Integer.parseInt("" + row); // This will throw a NumberFormatException if row is not a number
-          rowValid = true;
+          if (temp < 1) {
+            System.out.println("Please input coordinates within the range of A1 - I9");
+            rowValid = false;
+          }
+          else {
+            rowValid = true;
+          }
         } catch (NumberFormatException nfe) {
           System.out.println(row + " is not an int.");
           System.out.println("Please input coordinates in the format: A1.");
@@ -172,7 +178,7 @@ class executive {
     input = consoleInput.next();
     System.out.println("Here is player 2's current board:");
     player2Printer.print(false);
-    
+
     for (int i = 0; i < numberOfShips; i++) {
       boolean successfulPlacement = false;
       do {
@@ -192,8 +198,8 @@ class executive {
     int menuChoice;
     int attackCol;
     int attackRow;
-    char attackColChar;
-    char attackRowChar;
+    //char attackColChar;
+    //char attackRowChar;
 
     do {
       if (i % 2 == 0)// player 1's turn
@@ -205,54 +211,48 @@ class executive {
         menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
-          System.out.println("Where do you want to send your attack? (A1-I9)? ");
-          input = safelyGetCoordinates();
-          attackColChar = input.charAt(0);
-          attackRowChar = input.charAt(1);
-          // (y-axis) column char to int
-          attackCol = letterToInt(attackColChar);
-          // (x-axis) row char to int
-          // only proceed if row is valid
-          if (Character.getNumericValue(attackRowChar) >= 1 && Character.getNumericValue(attackRowChar) <= 9) {
-            attackRow = Character.getNumericValue(attackRowChar) - 1;
+          boolean incomplete = true;
+          do {
+            incomplete = false;
+            System.out.println("Where do you want to send your attack? (A1-I9)? ");
+            input = safelyGetCoordinates();
+            attackCol = letterToInt(input.charAt(0));
+            attackRow = Integer.parseInt(""+input.charAt(1)) - 1;
+          
+          if (CollisionHandler.check(player2Board, 'x', attackRow, attackCol) || CollisionHandler.check(player2Board, 'o', attackRow, attackCol)) {
+            System.out.println("That space has already been attacked. Please pick another. Here is the current board:");
+            player2Printer.print(true);
+            incomplete = true;
           } else {
-            break;
+            if (CollisionHandler.check(player2Board, '~', attackRow, attackCol)) {
+              System.out.println("Miss! Nice try.");
+              player2Board.addMarker('o', attackRow, attackCol);
+              player2Printer.print(true);
+            }
+            if (CollisionHandler.check(player2Board, 's', attackRow, attackCol)) {
+              System.out.println("Hit! Good job.");
+              player2Board.addMarker('x', attackRow, attackCol);
+              player2Printer.print(true);
+            }
           }
-
-          // IMPORTANT
-          // NEEDS IMPLEMENTATION--Use attackCol and attackRow as x and y values
-          // NEEDS IMPLEMENTATION--Change value of p1Win, if applicable
-          // IMPORTANT
+          } while (incomplete);
+          
 
           i++;
         }
         // Type "2" to review your board
         else if (menuChoice == 2) {
-          do {
-            // Print player 2's board
-            // does not end player's turn
-            // type "Q" or "q" to display menu again
-
-            // IMPORTANT
-            // NEEDS IMPLEMENTATION--print current player (Player 1)'s board)
-            // IMPORTANT
-
-          } while (consoleInput.next().toLowerCase() != "q");
+          clearTerminal();
+          System.out.println("Your board:");
+          player1Printer.print(false);
           postMenu();
           menuChoice = safelyGetIntInput();
         }
         // Type "3" to view your attack history
         else if (menuChoice == 3) {
-          do {
-            // Print Player 2's attack history board
-            // does not end player's turn
-            // type "Q" or "q" to display menu again
-
-            // IMPORTANT
-            // NEEDS IMPLEMENTATION--print current player (Player 1)'s attack history board)
-            // IMPORTANT
-
-          } while (consoleInput.next().toLowerCase() != "q");
+          clearTerminal();
+          System.out.println("Their board:");
+          player2Printer.print(true);
           postMenu();
           menuChoice = safelyGetIntInput();
         }
@@ -260,12 +260,14 @@ class executive {
         else if (menuChoice == 4) {
           // exit loop
           // player 2 declared winner & p1 as loser
+          System.out.println("");
           p1Win = false;
           p2Win = true;
-          i++;
+          break;
         }
         // if illegal input, print apology, then display menu choices again
         else {
+          clearTerminal();
           System.out.println("Sorry, that is not a valid menu option.");
           postMenu();
           menuChoice = safelyGetIntInput();
@@ -284,54 +286,54 @@ class executive {
         if (menuChoice == 1) {
           System.out.println("Where do you want to send your attack? (A1-I9)? ");
           input = safelyGetCoordinates();
-          attackColChar = input.charAt(0);
-          attackRowChar = input.charAt(1);
-          // (y-axis) column char to int
-          attackCol = letterToInt(attackColChar);
-          // (x-axis) row char to int
-          // only proceed if row is valid
-          if (Character.getNumericValue(attackRowChar) >= 1 && Character.getNumericValue(attackRowChar) <= 9) {
-            attackRow = Character.getNumericValue(attackRowChar) - 1;
+          attackCol = letterToInt(input.charAt(0));
+          attackRow = Integer.parseInt(""+input.charAt(1)) - 1;
+          
+          
+          boolean incomplete = true;
+          do {
+            incomplete = false;
+            System.out.println("Where do you want to send your attack? (A1-I9)? ");
+            input = safelyGetCoordinates();
+            attackCol = letterToInt(input.charAt(0));
+            attackRow = Integer.parseInt(""+input.charAt(1)) - 1;
+          
+          if (CollisionHandler.check(player1Board, 'x', attackRow, attackCol) || CollisionHandler.check(player1Board, 'o', attackRow, attackCol)) {
+            System.out.println("That space has already been attacked. Please pick another. Here is the current board:");
+            player1Printer.print(true);
+            incomplete = true;
           } else {
-            break;
+            if (CollisionHandler.check(player1Board, '~', attackRow, attackCol)) {
+              System.out.println("Miss! Nice try.");
+              player1Board.addMarker('o', attackRow, attackCol);
+              player1Printer.print(true);
+            }
+            if (CollisionHandler.check(player1Board, 's', attackRow, attackCol)) {
+              System.out.println("Hit! Good job.");
+              player1Board.addMarker('x', attackRow, attackCol);
+              player1Printer.print(true);
+            }
           }
-
-          // IMPORTANT
-          // NEEDS IMPLEMENTATION--Use attackCol and attackRow as x and y values
-          // NEEDS IMPLEMENTATION--Change value of p2Win, if applicable
-          // IMPORTANT
+          } while (incomplete);
+          
+         
 
           i++;
         }
 
         // Type "2" to review your board
         else if (menuChoice == 2) {
-          do {
-            // Print player 2's board
-            // does not end player's turn
-
-            // IMPORTANT
-            // NEEDS IMPLEMENTATION--print current player (Player 2)'s board
-            // IMPORTANT
-
-            // type "Q" or "q" to display menu again
-          } while (consoleInput.next().toLowerCase() != "q");
+          clearTerminal();
+          System.out.println("Your board:");
+          player2Printer.print(false);
           postMenu();
           menuChoice = safelyGetIntInput();
         }
-
         // Type "3" to view your attack history
         else if (menuChoice == 3) {
-          do {
-            // Print Player 2's attack history board
-            // does not end player's turn
-
-            // IMPORTANT
-            // NEEDS IMPLEMENTATION--print current player (Player 2)'s attack history board)
-            // IMPORTANT
-
-            // type "Q" or "q" to display menu again
-          } while (consoleInput.next().toLowerCase() != "q");
+          clearTerminal();
+          System.out.println("Their board:");
+          player1Printer.print(true);
           postMenu();
           menuChoice = safelyGetIntInput();
         }
@@ -342,10 +344,11 @@ class executive {
           System.out.println("");
           p1Win = true;
           p2Win = false;
-          i++;
+          break;
         }
         // if illegal input, print apology, then display menu choices again
         else {
+          clearTerminal();
           System.out.println("Sorry, that is not a valid menu option.");
           postMenu();
           menuChoice = safelyGetIntInput();
@@ -356,18 +359,21 @@ class executive {
     // GAME
     // END--------------------------------------------------------------------------------------------------------------------------------
     // Print Congratulations to winning player
-    if (p1Win == true && p2Win == false) {
+    if (p1Win == true) {
       System.out.println("Congratulations, Player 1!");
-    } else if (p1Win == false && p2Win == true) {
-      System.out.println("Congratulations, Player 2!");
     } else {
-      System.out.println("Sorry, there was an error.");
+      System.out.println("Congratulations, Player 2!");
     }
     // Thank you for playing
     System.out.println("Thank you for playing.");
-    System.out.println(" ");
+    System.out.println("");
 
   }
+  /*
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  */
 
   private boolean placeShip(Board board, int shipSize) {
     System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
