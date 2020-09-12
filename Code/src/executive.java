@@ -396,7 +396,7 @@ class executive {
     System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
     String input = safelyGetCoordinates(); // This validates the user input
     int col = letterToInt(input.charAt(0));
-    int row = Integer.parseInt("" + input.charAt(1));
+    int row = Integer.parseInt("" + input.charAt(1)) - 1;
     int size = shipSize + 1;
 
     try {
