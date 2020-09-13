@@ -1,22 +1,34 @@
 /**
-*  @Name:  Peter Tso
-*  @Email:  tsopeter@ku.edu
-*  @Brief:
-*            This handles the multiplexing the boards.
-*
-*  Update:
+* <h1> BoardPrinterWrapper </h1>
+* <b> tsopeter@ku.edu </b>
+* <p>
+*      The BoardPrinterWrapper is a class that handles the
+*      BoardPrinter class. It makes it easier to print the boards.
+* </p>
+* <p>
+*  <p> <b> Update: </b> </p>
+* <p>        20200910
 *            This class no longer supports multiplexing of the boards,
 *            in accordance to the specifications and requriements.
 *            It also no longer is implemeted from BoardInterface class.
 *            The file has been renamed to BoardPrinterWrapper.
-*
-*            @Date_Updated: 09-10-2020
-*  @Note:
-*             This class requires the following files:
-*             --Board.java
-*  @Date_Created: 09-08-2020
-*  @Date_Modified: 09-10-2020
-*
+* </p>
+* <p> <b> Requried Files: </b> </p>
+* <ul>
+*  <li> Board.java </li>
+* </ul>
+* <p>
+* @author tsopeter
+* @version 20200910
+*	@since					09-08-2020
+*	@since					09-10-2020
+* @since          09-13-2020
+* </p>
+* <p> <b> References: </b> </p>
+* <ul>
+* <li> https://www.tutorialspoint.com/java/java_documentation.html </li>
+* <li> https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html </li>
+* </ul>
 */
 public class BoardPrinterWrapper{
   private int xOffset;
@@ -31,10 +43,15 @@ public class BoardPrinterWrapper{
   private Board ui;
 
   /**
-  * @pre:   constructor
-  * @post:  implements the Board for the main board
-  * @param: must have offset and index offset
-  * @return:None
+  * This is the constructor, it creates a new board with offsets
+  * <p> <b> Preconditions: </b> </p>
+  * <p>
+  *	Must have valid Board Object and characters and a indexed boolean
+  * </p>
+  * @param t_g Bpard
+  * @param t_ship_marker char
+  * @param t_board_marker char
+  * @param t_indexed Boolean
   */
   public BoardPrinterWrapper(Board t_g, char t_ship_marker, char t_board_marker, boolean t_indexed){
     this.xOffset = 1;
@@ -50,8 +67,11 @@ public class BoardPrinterWrapper{
   }
 
   /**
-  * @pre:     must have constructed
-  * @post:    adds board to a board that has all the necessary elements
+  * This is a private method. It updates the offset Board with the current board
+  * <p> <b> Preconditions: </b> </p>
+  * <p>
+  *	Must have been constructed
+  * </p>
   */
   private void addBoard(){
       int xInput = 0;
@@ -86,26 +106,40 @@ public class BoardPrinterWrapper{
 
 
   /**
-  * @pre: must have called create
-  * @post:  adds a character to a arbitrary location on board
+  * This adds element to the board. It does not add elements to the given board
+  * <p> <b> Preconditions: </b> </p>
+  * <p>
+  *	Must have character and valid address
+  * </p>
+  * @param marker char
+  * @param x Int
+  * @param y Int
   */
   public void addElement(char marker, int x, int y){
     this.ui.addMarker(marker, x, y);
   }
 
   /**
-  * @pre:  must have called create
-  * @post:  returns a character of an arbitrary location on board
-  * @return: char
+  * This retunrs a element of the board at a given address
+  * <p> <b> Preconditions: </b> </p>
+  * <p>
+  *	Must have valid address
+  * </p>
+  * @param x Int
+  * @param y Int
+  * @return char element
   */
   public char getElement(int x, int y){
     return this.ui.getMarker(x, y);
   }
 
   /**
-  * @pre: must have called constructor
-  * @post:  returns the main Board Object
-  * @return: board
+  * This returns the offsetBoard
+  * <p> <b> Preconditions: </b> </p>
+  * <p>
+  *	Must have been constructed
+  * </p>
+  * @return Board offsetBoard
   */
   public Board getCopyBoard(){
     Board copy = new Board(ui.getXSize(), ui.getYSize(), this.board_marker);
@@ -118,7 +152,12 @@ public class BoardPrinterWrapper{
   }
 
   /**
-  *
+  * This uses the print function to print a normal board or attack board
+  * <p> <b> Preconditions: </b> </p>
+  * <p>
+  *	Must have valid boolean character and constructed
+  * </p>
+  * @param t_hidden boolean
   */
   public void print(boolean t_hidden){
     this.addBoard();

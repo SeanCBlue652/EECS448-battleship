@@ -1,8 +1,7 @@
 /**
-*	@Name:	Peter Tso
-*	@KUID:	2936825
-*	@Email: tsopeter@ku.edu
-*	@Brief:
+* <h1> Board </h1>
+* <p> <b> tsopeter@ku.edu </b> </p>
+*	<p>
 *		The Board.java file handles the char[][] map object.
 *		It allows to fill in the board with char board_marker
 *		and allows to add to board, get from board, and get the
@@ -13,15 +12,28 @@
 *		has the same value as this object
 *		It has getCopyMap(), this passes an instance of a char[][] Objec that
 *		has the same value as this.map Object.
-*	@Note:
-*		There are no protections from OutOfBounds. Please
+* </p>
+* <p> <b> Note: </b> </p>
+* <ul>
+*	<li>	There are no protections from OutOfBounds. Please
 *		implement protections on your own code when using
-*		Board.java.
-*
+*		Board.java. </li>
+* </ul>
+* <p> <b>
 *		Thank you.
-*
-*	@Date_Created:					09-05-2020
-*	@Date_Modified:					09-08-2020
+* </b> </p>
+* <p>
+* @author tsopeter
+* @version 20200913
+*	@since					09-05-2020
+*	@since					09-08-2020
+* @since					09-13-2020
+* </p>
+* <p> <b> References: </b> </p>
+* <ul>
+* <li> https://www.tutorialspoint.com/java/java_documentation.html </li>
+* <li> https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html </li>
+* </ul>
 */
 public class Board{
 
@@ -32,9 +44,14 @@ public class Board{
 	char board_marker;
 
 	/**
-	*	@pre:	constructor
-	*	@post:	creates a Board object
-	*	@param: int, int, char
+	* Must have valid dimensions and board marker
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have strictly positive x and y
+	* </p>
+	*	@param x Int
+	* @param y Int
+	* @param t_board_marker Char
 	*/
 	public Board(int x, int y, char t_board_marker){
 		this.xSize = 0;
@@ -55,18 +72,24 @@ public class Board{
 	}
 
 	/**
-	*	@pre:	 must been constructed
-	*	@post:	 pass this char[][] Object
-	*	@return: char[][]
+	* This returns this map object
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have been constructed
+	* </p>
+	*	@return char[][]
 	*/
 	public char[][] getBoard(){
 		return this.map;
 	}
 
 	/**
-	*	@pre:	 must been constructed
-	*	@post:	 pass a instance of a char[][] Object
-	*	@return: char[][]
+	* This returns a copy of the Map
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have been constructed
+	* </p>
+	*	@return char[][]
 	*/
 	public char[][] getCopyMap(){
 		char[][] copy = new char[this.ySize][this.xSize];
@@ -78,9 +101,12 @@ public class Board{
 		return copy;
 	}
 	/**
-	*	@pre:	must be constructed
-	*	@post: pass a Board Object with same value as this Object
-	*	@return: Board
+	* This returns a copy of the Board
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have been constructed
+	* </p>
+	*	@return Board
 	*/
 	public Board getCopyBoard(){
 		Board copy = new Board(this.xSize, this.ySize, this.board_marker);
@@ -93,38 +119,54 @@ public class Board{
 	}
 
 	/**
-	*	@pre:	 must been constructed
-	*	@post:	 returns the x-axis dimension
-	*		        of board
-	*	@return: int
+	* This returns the X size of the array
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have been constructed
+	* </p>
+	*	@return int
 	*/
 	public int getXSize(){
 		return this.xSize;
 	}
 
 	/**
-	*	@pre:	 must been constructed
-	*	@post:	 returns the y-axis dimension
-	*		 of board
-	*	@return: int
+	* This returns the Y size of the array
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have been constructed
+	* </p>
+	*	@return int
 	*/
 	public int getYSize(){
 		return this.ySize;
 	}
 
 	/**
-	*	@pre:	 must been constructed
-	*	@post:	 adds char marker to char[y][x] map
-	*	@return: NONE
+	* This method adds to the Map
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have been constructed
+	* Must have valid address
+	* </p>
+	* @param marker Char
+	* @param x Int
+	* @param y Int
 	*/
 	public void addMarker(char marker, int x, int y){
 		this.map[y][x] = marker;
 	}
 
 	/**
-	*	@pre:	 must been constructed
-	*	@post:	 gets char marker from char[y][x] map
-	*	@return: char
+	* This method gets a character from Map
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have been constructed
+	* Must have valid address
+	* </p>
+	* @param x Int
+	* @param y Int
+	*	@return char
 	*/
 	public char getMarker(int x, int y){
 		return this.map[y][x];

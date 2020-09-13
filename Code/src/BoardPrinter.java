@@ -1,22 +1,37 @@
 /**
-*	@Name:	 Peter Tso
-*	@KUID:	 2936825
-*	@Email:  tsopeter@ku.edu
-*	@Brief:
-*		This is the printer file. It partially handles the UI of the game.
-*	@Req'd:
-*		The required files are below:
-*		--Board.java.
-*
+* <h1> BoardPrinter </h1>
+* <b> tsopeter@ku.edu </b>
+*	<p>
+*		This is the printer file. It handles printing to the screen
+* </p>
+*	<p> <b> Required Files: </b> </p>
+* <ul>
+*		<li> Board.java </li>
+* </ul>
+* <p> <b>
 *		Thank you.
-*
-*	@Date_Created:					09-05-2020
-* @Date_Modified:					09-08-2020
+* </b> </p>
+* <p>
+* @author tsopeter
+* @version 20200913
+*	@since					09-05-2020
+*	@since					09-08-2020
+* @since					09-13-2020
+* </p>
+* <p> <b> References: </b> </p>
+* <ul>
+* <li> https://www.tutorialspoint.com/java/java_documentation.html </li>
+* <li> https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html </li>
+* </ul>
 */
 public class BoardPrinter{
 	/**
-	*	@pre:  must have valid Board
-	*	@post: prints the board
+	* This static method prints the board normally
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have valid Board Object
+	* </p>
+	*	@param g Board
 	*/
 	public static void printBoard(Board g){
 		for(int i = 0; i < g.getYSize(); i++){
@@ -29,8 +44,13 @@ public class BoardPrinter{
 	}
 
 	/**
-	*	@pre:	must have valid Board
-	* @post: prints the board without a given character
+	*	This static method prints the board without a given character
+	* <p> <b> Preconditions: </b> </p>
+	* <p>
+	*	Must have valid Board Object and remove_character
+	* </p>
+	* @param g Board
+	* @param remove_marker char
 	*/
 	public static void printAndRemove(Board g, char remove_marker){
 		for(int i = 0; i < g.getYSize(); i++){
