@@ -249,6 +249,8 @@ class executive {
         menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
+          System.out.println("Their board:");
+          player2Printer.print(true);
           boolean incomplete = true;
           do {
             incomplete = false;
@@ -299,6 +301,8 @@ class executive {
           clearTerminal();
           System.out.println("Their board:");
           player2Printer.print(true);
+          System.out.println("Enter anything to continue.");
+          input = consoleInput.next();
           postMenu();
           menuChoice = safelyGetIntInput();
         }
@@ -330,7 +334,8 @@ class executive {
         menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
-
+          System.out.println("Their board:");
+          player1Printer.print(true);
           boolean incomplete = true;
           do {
             incomplete = false;
@@ -382,6 +387,8 @@ class executive {
           clearTerminal();
           System.out.println("Their board:");
           player1Printer.print(true);
+          System.out.println("Enter anything to continue.");
+          input = consoleInput.next();
           postMenu();
           menuChoice = safelyGetIntInput();
         }
