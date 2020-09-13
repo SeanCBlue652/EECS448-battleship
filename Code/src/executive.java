@@ -109,8 +109,7 @@ class executive {
           if (temp < 1) {
             System.out.println("Please input coordinates within the range of A1 - I9");
             rowValid = false;
-          }
-          else {
+          } else {
             rowValid = true;
           }
         } catch (NumberFormatException nfe) {
@@ -136,7 +135,6 @@ class executive {
     Board player2Board = new Board(9, 9, '~');
     BoardPrinterWrapper player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
     int numberOfShips = 0;
-    char shipDirection;
     String input = "";
     // greetings
     System.out.println("Welcome to the game of Battleship!");
@@ -149,7 +147,8 @@ class executive {
 
     // There are numberOfShips ships to place for each player, each with ships sized
     // 1x(1->numberOfShips)
-    System.out.println("Player 2, please look away from the screen while Player 1 places their ships. Input anything to continue when ready.");
+    System.out.println(
+        "Player 2, please look away from the screen while Player 1 places their ships. Input anything to continue when ready.");
     input = consoleInput.next();
     int tempShipRow;
     // char tempShipRowChar;
@@ -159,11 +158,30 @@ class executive {
     // for loop: Where does P1 want the tip of their boat (A1-I9)
     System.out.println("Here is player 1's current board:");
     player1Printer.print(false);
-    
+
     for (int i = 0; i < numberOfShips; i++) {
       boolean successfulPlacement = false;
+      String shipNumberString = "";
+      switch (i) {
+        case 1:
+          shipNumberString = "second";
+          break;
+        case 2:
+          shipNumberString = "third";
+          break;
+        case 3:
+          shipNumberString = "fourth";
+          break;
+        case 4:
+          shipNumberString = "fifth";
+          break;
+
+        default:
+          shipNumberString = "first";
+          break;
+      }
       do {
-        successfulPlacement = placeShip(player1Board, i);
+        successfulPlacement = placeShip(player1Board, i, shipNumberString);
         if (!successfulPlacement) {
           System.out.println("Here is player 1's current board:");
           player1Printer.print(false);
@@ -174,15 +192,35 @@ class executive {
 
     clearTerminal();
 
-    System.out.println("It's now Player 1's turn to look away from the screen while Player 2 places their ships. Input anything to continue when ready.");
+    System.out.println(
+        "It's now Player 1's turn to look away from the screen while Player 2 places their ships. Input anything to continue when ready.");
     input = consoleInput.next();
     System.out.println("Here is player 2's current board:");
     player2Printer.print(false);
 
     for (int i = 0; i < numberOfShips; i++) {
       boolean successfulPlacement = false;
+      String shipNumberString = "";
+      switch (i) {
+        case 1:
+          shipNumberString = "second";
+          break;
+        case 2:
+          shipNumberString = "third";
+          break;
+        case 3:
+          shipNumberString = "fourth";
+          break;
+        case 4:
+          shipNumberString = "fifth";
+          break;
+
+        default:
+          shipNumberString = "first";
+          break;
+      }
       do {
-        successfulPlacement = placeShip(player2Board, i);
+        successfulPlacement = placeShip(player2Board, i, shipNumberString);
         if (!successfulPlacement) {
           System.out.println("Here is player 2's current board:");
           player2Printer.print(false);
@@ -198,8 +236,8 @@ class executive {
     int menuChoice;
     int attackCol;
     int attackRow;
-    //char attackColChar;
-    //char attackRowChar;
+    // char attackColChar;
+    // char attackRowChar;
 
     do {
       if (i % 2 == 0)// player 1's turn
@@ -217,29 +255,34 @@ class executive {
             System.out.println("Where do you want to send your attack? (A1-I9)? ");
             input = safelyGetCoordinates();
             attackCol = letterToInt(input.charAt(0));
-            attackRow = Integer.parseInt(""+input.charAt(1)) - 1;
-          
-          if (CollisionHandler.check(player2Board, 'x', attackRow, attackCol) || CollisionHandler.check(player2Board, 'o', attackRow, attackCol)) {
-            System.out.println("That space has already been attacked. Please pick another. Here is the current board:");
-            player2Printer.print(true);
-            incomplete = true;
-          } else {
-            if (CollisionHandler.check(player2Board, '~', attackRow, attackCol)) {
-              System.out.println("Miss! Nice try.");
-              player2Board.addMarker('o', attackRow, attackCol);
+            attackRow = Integer.parseInt("" + input.charAt(1)) - 1;
+
+            if (CollisionHandler.check(player2Board, 'x', attackRow, attackCol)
+                || CollisionHandler.check(player2Board, 'o', attackRow, attackCol)) {
+              System.out
+                  .println("That space has already been attacked. Please pick another. Here is the current board:");
               player2Printer.print(true);
+              incomplete = true;
+            } else {
+              if (CollisionHandler.check(player2Board, '~', attackRow, attackCol)) {
+                System.out.println("Miss! Nice try.");
+                player2Board.addMarker('o', attackRow, attackCol);
+                player2Printer.print(true);
+              }
+              if (CollisionHandler.check(player2Board, 's', attackRow, attackCol)) {
+                System.out.println("Hit! Good job.");
+                player2Board.addMarker('x', attackRow, attackCol);
+                player2Printer.print(true);
+              }
             }
-            if (CollisionHandler.check(player2Board, 's', attackRow, attackCol)) {
-              System.out.println("Hit! Good job.");
-              player2Board.addMarker('x', attackRow, attackCol);
-              player2Printer.print(true);
-            }
-          }
           } while (incomplete);
-          
+
           if (playerWon(player2Board)) {
             p1Win = true;
             break;
+          } else {
+            System.out.println("Enter anything to continue.");
+            input = consoleInput.next();
           }
           i++;
         }
@@ -287,37 +330,41 @@ class executive {
         menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
-          
+
           boolean incomplete = true;
           do {
             incomplete = false;
             System.out.println("Where do you want to send your attack? (A1-I9)? ");
             input = safelyGetCoordinates();
             attackCol = letterToInt(input.charAt(0));
-            attackRow = Integer.parseInt(""+input.charAt(1)) - 1;
-          
-          if (CollisionHandler.check(player1Board, 'x', attackRow, attackCol) || CollisionHandler.check(player1Board, 'o', attackRow, attackCol)) {
-            System.out.println("That space has already been attacked. Please pick another. Here is the current board:");
-            player1Printer.print(true);
-            incomplete = true;
-          } else {
-            if (CollisionHandler.check(player1Board, '~', attackRow, attackCol)) {
-              System.out.println("Miss! Nice try.");
-              player1Board.addMarker('o', attackRow, attackCol);
+            attackRow = Integer.parseInt("" + input.charAt(1)) - 1;
+
+            if (CollisionHandler.check(player1Board, 'x', attackRow, attackCol)
+                || CollisionHandler.check(player1Board, 'o', attackRow, attackCol)) {
+              System.out
+                  .println("That space has already been attacked. Please pick another. Here is the current board:");
               player1Printer.print(true);
+              incomplete = true;
+            } else {
+              if (CollisionHandler.check(player1Board, '~', attackRow, attackCol)) {
+                System.out.println("Miss! Nice try.");
+                player1Board.addMarker('o', attackRow, attackCol);
+                player1Printer.print(true);
+              }
+              if (CollisionHandler.check(player1Board, 's', attackRow, attackCol)) {
+                System.out.println("Hit! Good job.");
+                player1Board.addMarker('x', attackRow, attackCol);
+                player1Printer.print(true);
+              }
             }
-            if (CollisionHandler.check(player1Board, 's', attackRow, attackCol)) {
-              System.out.println("Hit! Good job.");
-              player1Board.addMarker('x', attackRow, attackCol);
-              player1Printer.print(true);
-            }
-          }
           } while (incomplete);
-          
-         
+
           if (playerWon(player1Board)) {
             p2Win = true;
             break;
+          } else {
+            System.out.println("Enter anything to continue.");
+            input = consoleInput.next();
           }
           i++;
         }
@@ -371,24 +418,25 @@ class executive {
 
   }
   /*
-
-------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  */
+   * 
+   * -----------------------------------------------------------------------------
+   * -------------------------------------------------------------------------
+   * 
+   */
 
   private boolean playerWon(Board enemyBoard) {
-    for(int i = 0; i < 9; i++) {
-      for(int j = 0; j < 9; j++) {
+    for (int i = 0; i < 9; i++) {
+      for (int j = 0; j < 9; j++) {
         if (enemyBoard.getMarker(i, j) == 's') {
-          return(false);
+          return (false);
         }
       }
     }
-    return(true);
+    return (true);
   }
 
-  private boolean placeShip(Board board, int shipSize) {
-    System.out.println("Where do you want to place the tip of your ship? (A1-I9)? ");
+  private boolean placeShip(Board board, int shipSize, String shipNumber) {
+    System.out.println("Where do you want to place the tip of your " + shipNumber + " ship? (A1-I9)? ");
     String input = safelyGetCoordinates(); // This validates the user input
     int col = letterToInt(input.charAt(0));
     int row = Integer.parseInt("" + input.charAt(1)) - 1;
@@ -406,29 +454,41 @@ class executive {
 
     int numOpenDirections = 4;
     try {
-      if (CollisionHandler.check(board, 's', row + 1, col)) {
-        numOpenDirections--;
+      for (int i = 1; i <= size; i++) {
+        if (CollisionHandler.check(board, 's', row + i, col)) {
+          numOpenDirections--;
+          break;
+        }
       }
     } catch (IllegalArgumentException iae) {
       numOpenDirections--;
     }
     try {
-      if (CollisionHandler.check(board, 's', row - 1, col)) {
-        numOpenDirections--;
+      for (int i = 1; i <= size; i++) {
+        if (CollisionHandler.check(board, 's', row - i, col)) {
+          numOpenDirections--;
+          break;
+        }
       }
     } catch (IllegalArgumentException iae) {
       numOpenDirections--;
     }
     try {
-      if (CollisionHandler.check(board, 's', row, col + 1)) {
-        numOpenDirections--;
+      for (int i = 1; i <= size; i++) {
+        if (CollisionHandler.check(board, 's', row, col + i)) {
+          numOpenDirections--;
+          break;
+        }
       }
     } catch (IllegalArgumentException iae) {
       numOpenDirections--;
     }
     try {
-      if (CollisionHandler.check(board, 's', row, col - 1)) {
-        numOpenDirections--;
+      for (int i = 1; i <= size; i++) {
+        if (CollisionHandler.check(board, 's', row, col - i)) {
+          numOpenDirections--;
+          break;
+        }
       }
     } catch (IllegalArgumentException iae) {
       numOpenDirections--;
@@ -447,7 +507,7 @@ class executive {
       shipDirection = getValidShipDirection();
 
       switch (shipDirection) {
-        case 'n':
+        case 's':
           directionSucceeded = true;
           for (int z = 0; z < size; z++) {
             if (directionSucceeded) {
@@ -464,11 +524,11 @@ class executive {
               }
             }
             if (directionSucceeded) {
-              shipDirection = 'n';
+              shipDirection = 's';
             }
           }
           break;
-        case 's':
+        case 'n':
           directionSucceeded = true;
           for (int z = 0; z < size; z++) {
             if (directionSucceeded) {
@@ -485,7 +545,7 @@ class executive {
               }
             }
             if (directionSucceeded) {
-              shipDirection = 's';
+              shipDirection = 'n';
             }
           }
           break;
@@ -544,34 +604,32 @@ class executive {
     switch (shipDirection) {
       case 'n':
         for (int i = 0; i < size; i++) {
-          board.addMarker('s', row+i, col);
+          board.addMarker('s', row - i, col);
         }
         break;
-        case 's':
+      case 's':
         for (int i = 0; i < size; i++) {
-          board.addMarker('s', row-i, col);
+          board.addMarker('s', row + i, col);
         }
         break;
-        case 'w':
+      case 'w':
         for (int i = 0; i < size; i++) {
-          board.addMarker('s', row, col-i);
+          board.addMarker('s', row, col - i);
         }
         break;
-        case 'e':
+      case 'e':
         for (int i = 0; i < size; i++) {
-          board.addMarker('s', row, col+i);
+          board.addMarker('s', row, col + i);
         }
         break;
-    
+
       default:
         break;
     }
 
-    return(true);
+    return (true);
 
   }
-
-
 
   private char getValidShipDirection() {
     String userInput = "";
