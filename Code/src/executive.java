@@ -525,12 +525,12 @@ class executive {
               try {
                 if (CollisionHandler.check(board, 's', row + z, col)) {
                   int num = row + z;
-                  System.out.println("The space " + col + num + " is already occupied. Please pick a new orientation.");
+                  System.out.println("The space " + coordinateLetters[col] + num + " is already occupied. Please pick a new orientation.");
                   directionSucceeded = false;
                 }
               } catch (IllegalArgumentException iae) {
                 int num = row + z;
-                System.out.println("The space " + col + num + " is out of bounds. Please pick a new orientation.");
+                System.out.println("The space " + coordinateLetters[col] + num + " is out of bounds. Please pick a new orientation.");
                 directionSucceeded = false;
               }
             }
@@ -546,12 +546,12 @@ class executive {
               try {
                 if (CollisionHandler.check(board, 's', row - z, col)) {
                   int num = row - z;
-                  System.out.println("The space " + col + num + " is already occupied. Please pick a new orientation.");
+                  System.out.println("The space " + coordinateLetters[col] + num + " is already occupied. Please pick a new orientation.");
                   directionSucceeded = false;
                 }
               } catch (IllegalArgumentException iae) {
                 int num = row - z;
-                System.out.println("The space " + col + num + " is out of bounds. Please pick a new orientation.");
+                System.out.println("The space " + coordinateLetters[col] + num + " is out of bounds. Please pick a new orientation.");
                 directionSucceeded = false;
               }
             }
@@ -572,7 +572,7 @@ class executive {
                   directionSucceeded = false;
                 }
               } catch (IllegalArgumentException iae) {
-                char letter = coordinateLetters[col - z + 1];
+                char letter = coordinateLetters[col - z];
                 System.out.println(
                     "The space to the west of " + letter + row + " is out of bounds. Please pick a new orientation.");
                 directionSucceeded = false;
@@ -595,7 +595,7 @@ class executive {
                   directionSucceeded = false;
                 }
               } catch (IllegalArgumentException iae) {
-                char letter = coordinateLetters[col + z - 1];
+                char letter = coordinateLetters[col + z];
                 System.out.println(
                     "The space to the east of " + letter + row + " is out of bounds. Please pick a new orientation.");
                 directionSucceeded = false;
