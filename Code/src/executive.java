@@ -249,6 +249,7 @@ class executive {
         menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
+          clearTerminal();
           System.out.println("Their board:");
           player2Printer.print(true);
           boolean incomplete = true;
@@ -267,11 +268,13 @@ class executive {
               incomplete = true;
             } else {
               if (CollisionHandler.check(player2Board, '~', attackRow, attackCol)) {
+                clearTerminal();
                 System.out.println("Miss! Nice try.");
                 player2Board.addMarker('o', attackRow, attackCol);
                 player2Printer.print(true);
               }
               if (CollisionHandler.check(player2Board, 's', attackRow, attackCol)) {
+                clearTerminal();
                 System.out.println("Hit! Good job.");
                 player2Board.addMarker('x', attackRow, attackCol);
                 player2Printer.print(true);
@@ -293,8 +296,9 @@ class executive {
           clearTerminal();
           System.out.println("Your board:");
           player1Printer.print(false);
-          postMenu();
-          menuChoice = safelyGetIntInput();
+          System.out.println("Enter anything to continue.");
+          input = consoleInput.next();
+          
         }
         // Type "3" to view your attack history
         else if (menuChoice == 3) {
@@ -303,8 +307,7 @@ class executive {
           player2Printer.print(true);
           System.out.println("Enter anything to continue.");
           input = consoleInput.next();
-          postMenu();
-          menuChoice = safelyGetIntInput();
+         
         }
         // Type "4" to forfeit match
         else if (menuChoice == 4) {
@@ -334,6 +337,7 @@ class executive {
         menuChoice = safelyGetIntInput();
         // Type "1" to choose where to attack
         if (menuChoice == 1) {
+          clearTerminal();
           System.out.println("Their board:");
           player1Printer.print(true);
           boolean incomplete = true;
@@ -352,11 +356,13 @@ class executive {
               incomplete = true;
             } else {
               if (CollisionHandler.check(player1Board, '~', attackRow, attackCol)) {
+                clearTerminal();
                 System.out.println("Miss! Nice try.");
                 player1Board.addMarker('o', attackRow, attackCol);
                 player1Printer.print(true);
               }
               if (CollisionHandler.check(player1Board, 's', attackRow, attackCol)) {
+                clearTerminal();
                 System.out.println("Hit! Good job.");
                 player1Board.addMarker('x', attackRow, attackCol);
                 player1Printer.print(true);
@@ -379,8 +385,8 @@ class executive {
           clearTerminal();
           System.out.println("Your board:");
           player2Printer.print(false);
-          postMenu();
-          menuChoice = safelyGetIntInput();
+          System.out.println("Enter anything to continue.");
+          input = consoleInput.next();
         }
         // Type "3" to view your attack history
         else if (menuChoice == 3) {
@@ -389,8 +395,6 @@ class executive {
           player1Printer.print(true);
           System.out.println("Enter anything to continue.");
           input = consoleInput.next();
-          postMenu();
-          menuChoice = safelyGetIntInput();
         }
         // Type "4" to forfeit match
         else if (menuChoice == 4) {
