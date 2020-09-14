@@ -3,7 +3,7 @@ import java.lang.IllegalArgumentException;
 
 /**
  * 
- * <h1> Executive </h1>
+ * <h1>Executive</h1>
  * <p>
  * The Executive class handles the main game logic. This class handles the menu
  * interactions, keeping track of the state of the game, and determining a
@@ -12,40 +12,34 @@ import java.lang.IllegalArgumentException;
  * 
  * 
  * 
- * <b>
-* Authors: Sean Cunningham, Samuel Gilchrist
-* </b>
-* <p>
-* Sean's KUID: 2935773
-* </p>
-* <p>
-* Sean's Email: s096c429@ku.edu
-* </p>
-* <p>
-* Sam's KUID: 2886577
-* </p>
-* <p>
-* Sam's Email: samofgil@ku.edu
-* </p>
- * @author Sean Cunningham
- * <div>
+ * <b> Authors: Sean Cunningham, Samuel Gilchrist </b>
+ * <p>
+ * Sean's KUID: 2935773
+ * </p>
+ * <p>
+ * Sean's Email: s096c429@ku.edu
+ * </p>
+ * <p>
+ * Sam's KUID: 2886577
+ * </p>
+ * <p>
+ * Sam's Email: samofgil@ku.edu
+ * </p>
+ * 
+ * @author Sean Cunningham <div>
  * @Sean_KUID 2935773
- * @Sean_Email s096c429@ku.edu
- * </div>
+ * @Sean_Email s096c429@ku.edu </div>
  * 
- * @author Samuel Gilchrist
- * <div>
+ * @author Samuel Gilchrist <div>
  * @Sam_KUID 2886577
- * @Sam_Email samofgil@ku.edu
- * </div>
- *            
+ * @Sam_Email samofgil@ku.edu </div>
  * 
+ *  <p>
  *            <p>
  *            <b> References: </b>
  *            </p>
  *            <ul>
- *            <li> 
- *            https://www.tutorialspoint.com/java/java_documentation.html
+ *            <li> https://www.tutorialspoint.com/java/java_documentation.html
  *            </li>
  *            <li>
  *            https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html
@@ -58,7 +52,7 @@ import java.lang.IllegalArgumentException;
  *            https://beginnersbook.com/2013/12/java-string-charat-method-example/
  *            </li>
  *            </ul>
- * 
+ * </p>
  * 
  *
  */
@@ -78,7 +72,7 @@ public class Executive {
   }
 
   /**
-   *  
+   * 
    * Prints 50 newlines to the terminal to move any present text off screen.
    * 
    */
@@ -103,7 +97,7 @@ public class Executive {
    * @throws IllegalArgumentException if the char cannot be found within the
    *                                  coordinateLetters array, meaning that it is
    *                                  invalid input.
-   * </p>
+   *                                  </p>
    * 
    */
   public int letterToInt(char col) {
