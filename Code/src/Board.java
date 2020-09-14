@@ -24,7 +24,7 @@
  * <b> Thank you. </b>
  * </p>
  * <p>
- * 
+ *
  * @author tsopeter
  * @version 20200913
  * @since 09-05-2020
@@ -63,7 +63,7 @@ public class Board {
 	 * <p>
 	 * Makes a map with x and y dimensions
 	 * </p>
-	 * 
+	 *
 	 * @param x              Int
 	 * @param y              Int
 	 * @param t_board_marker Char
@@ -100,7 +100,7 @@ public class Board {
 	 * <p>
 	 * Returns this.map Object
 	 * </p>
-	 * 
+	 *
 	 * @return char[][]
 	 */
 	public char[][] getBoard() {
@@ -121,7 +121,7 @@ public class Board {
 	 * <p>
 	 * Returns a copy of this.map with char[][] copy
 	 * </p>
-	 * 
+	 *
 	 * @return char[][]
 	 */
 	public char[][] getCopyMap() {
@@ -148,14 +148,14 @@ public class Board {
 	 * <p>
 	 * Returns a copy of this object with Board
 	 * </p>
-	 * 
+	 *
 	 * @return Board
 	 */
 	public Board getCopyBoard() {
 		Board copy = new Board(this.xSize, this.ySize, this.board_marker);
 		for (int i = 0; i < this.ySize; i++) {
 			for (int k = 0; k < this.xSize; k++) {
-				copy.addMarker(this.map[i][k], i, k);
+				copy.addMarker(this.map[i][k], k, i);
 			}
 		}
 		return copy;
@@ -175,7 +175,7 @@ public class Board {
 	 * <p>
 	 * Returns the x dimension
 	 * </p>
-	 * 
+	 *
 	 * @return int
 	 */
 	public int getXSize() {
@@ -196,7 +196,7 @@ public class Board {
 	 * <p>
 	 * Returns the y dimension
 	 * </p>
-	 * 
+	 *
 	 * @return int
 	 */
 	public int getYSize() {
@@ -217,7 +217,7 @@ public class Board {
 	 * <p>
 	 * Adds a character to the map Object
 	 * </p>
-	 * 
+	 *
 	 * @param marker Char
 	 * @param x      Int
 	 * @param y      Int
@@ -240,7 +240,7 @@ public class Board {
 	 * <p>
 	 * Returns a character from a (x,y) position of map
 	 * </p>
-	 * 
+	 *
 	 * @param x Int
 	 * @param y Int
 	 * @return char
