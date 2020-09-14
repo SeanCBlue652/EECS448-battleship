@@ -3,16 +3,17 @@ import java.lang.IllegalArgumentException;
 
 /**
  * 
- * The executive class handles the main game logic.
- * This class handles the menu interactions, keeping track of the state of the game, and determining a winner.
+ * The executive class handles the main game logic. This class handles the menu
+ * interactions, keeping track of the state of the game, and determining a
+ * winner.
  * 
  * @author: Sean Cunningham
  * @KUID: 2935773
  * @Email: s096c429@ku.edu
  * 
  * @author: Samuel Gilchrist
- * @KUID: 
- * @Email: 
+ * @KUID:
+ * @Email:
  */
 class executive {
 
@@ -22,7 +23,8 @@ class executive {
   private Scanner consoleInput = new Scanner(System.in);
 
   /**
-   * coordinateLetters is an array of chars a - i which are used for mapping user input to coordinates.
+   * coordinateLetters is an array of chars a - i which are used for mapping user
+   * input to coordinates.
    */
   private char[] coordinateLetters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' };
 
@@ -53,9 +55,14 @@ class executive {
    * Used to convert letters to ints, used when given coordinates in (A1-I9) form
    * 
    * 
-   * @param col  The char input from the user representing a column on the board
+   * @pre: Must be surrounded by a try catch in any situations where the input
+   *       parameter is not already validated
+   * @param col The char input from the user representing a column on the board
    * @return Returns the position of the char within the array coordinateLetters
-   * @throws IllegalArgumentException if the char cannot be found within the coordinateLetters array, meaning that it is invalid input.
+   * @throws IllegalArgumentException if the char cannot be found within the
+   *                                  coordinateLetters array, meaning that it is
+   *                                  invalid input.
+   * 
    */
   private int letterToInt(char col) {
     col = Character.toLowerCase(col);
@@ -67,7 +74,14 @@ class executive {
     throw new IllegalArgumentException(col + " is out of bounds.");
   }
 
-  // Writes menu
+  /**
+   * Displays the menu in the console.
+   * 
+   * @pre: Calling clearTerminal() beforehand is recommended, but not required
+   * @return None
+   * @post: The menu will be displayed
+   * 
+   */
   private void postMenu() {
     System.out.println("Menu:");
     System.out.println("Type '1' to choose where to attack.");
@@ -77,6 +91,16 @@ class executive {
     System.out.println("CHOICE:");
   }
 
+  /**
+   * 
+   * Validates that the input is an int from 1 to 5, inclusive.
+   * 
+   * 
+   * @param num The int to validate
+   * @return True if the value of num valid, otherwise returns false and prints a
+   *         message to the console
+   * 
+   */
   private boolean validateShipNum(int num) {
     if (num > 5 || num < 1) {
       System.out.println("Please input an int from 1 to 5.");
@@ -85,6 +109,16 @@ class executive {
     return (true);
   }
 
+  /**
+   * 
+   * Requests an int from the user in the console until an int is successfully
+   * received This method handles errors that are thrown by Integer.parseInt()
+   * 
+   * 
+   * @pre: None
+   * @return The int provided by the user
+   * 
+   */
   private int safelyGetIntInput() {
     boolean invalidInput = true;
     String input = "";
@@ -103,6 +137,16 @@ class executive {
     return (output);
   }
 
+  /**
+   * 
+   * This method prompts the user for coordinates in the format A1 (LETTERNUMBER)
+   * This method handles bad input This method handles errors thrown by
+   * Integer.parseInt() and letterToInt()
+   * 
+   * 
+   * @return The String containing the coordinates specified by the user
+   * 
+   */
   private String safelyGetCoordinates() {
     boolean invalidInput = true;
     String input = "";
@@ -129,7 +173,7 @@ class executive {
         }
         try {
           temp = Integer.parseInt("" + row); // This will throw a NumberFormatException if row is not a number
-          if (temp < 1) {
+          if (temp < 1 || temp > 9) {
             System.out.println("Please input coordinates within the range of A1 - I9");
             rowValid = false;
           } else {
@@ -150,7 +194,12 @@ class executive {
     return (output);
   }
 
-  // main function
+  /**
+   * 
+   * This method drives the central game logic and flow. This method sets up the
+   * game and handles each player's turns until the game ends.
+   * 
+   */
   public void run() {
     // SET-UP--------------------------------------------------------------------------------------------------------------------------------
     Board player1Board = new Board(9, 9, '~');
@@ -321,7 +370,7 @@ class executive {
           player1Printer.print(false);
           System.out.println("Enter anything to continue.");
           input = consoleInput.next();
-          
+
         }
         // Type "3" to view your attack history
         else if (menuChoice == 3) {
@@ -330,7 +379,7 @@ class executive {
           player2Printer.print(true);
           System.out.println("Enter anything to continue.");
           input = consoleInput.next();
-         
+
         }
         // Type "4" to forfeit match
         else if (menuChoice == 4) {
@@ -458,6 +507,16 @@ class executive {
    * 
    */
 
+  /**
+   * 
+   * This method determines whether a player has won the game. This is
+   * accomplished by checking every space on the enemy player's board, and if
+   * there are no remaining ships, then the game is over.
+   * 
+   * @param enemyBoard  An instance of the Board class containing the enemy player's data
+   * @return False if the enemy has any remaining unsunk ships; Otherwise returns true
+   * 
+   */
   private boolean playerWon(Board enemyBoard) {
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
@@ -548,12 +607,14 @@ class executive {
               try {
                 if (CollisionHandler.check(board, 's', row + z, col)) {
                   int num = row + z;
-                  System.out.println("The space " + coordinateLetters[col] + num + " is already occupied. Please pick a new orientation.");
+                  System.out.println("The space " + coordinateLetters[col] + num
+                      + " is already occupied. Please pick a new orientation.");
                   directionSucceeded = false;
                 }
               } catch (IllegalArgumentException iae) {
                 int num = row + z;
-                System.out.println("The space " + coordinateLetters[col] + num + " is out of bounds. Please pick a new orientation.");
+                System.out.println(
+                    "The space " + coordinateLetters[col] + num + " is out of bounds. Please pick a new orientation.");
                 directionSucceeded = false;
               }
             }
@@ -569,12 +630,14 @@ class executive {
               try {
                 if (CollisionHandler.check(board, 's', row - z, col)) {
                   int num = row - z;
-                  System.out.println("The space " + coordinateLetters[col] + num + " is already occupied. Please pick a new orientation.");
+                  System.out.println("The space " + coordinateLetters[col] + num
+                      + " is already occupied. Please pick a new orientation.");
                   directionSucceeded = false;
                 }
               } catch (IllegalArgumentException iae) {
                 int num = row - z;
-                System.out.println("The space " + coordinateLetters[col] + num + " is out of bounds. Please pick a new orientation.");
+                System.out.println(
+                    "The space " + coordinateLetters[col] + num + " is out of bounds. Please pick a new orientation.");
                 directionSucceeded = false;
               }
             }
