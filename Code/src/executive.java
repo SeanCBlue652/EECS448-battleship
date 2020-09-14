@@ -3,28 +3,49 @@ import java.lang.IllegalArgumentException;
 
 /**
  * 
+ * <h1> Executive </h1>
  * <p>
  * The Executive class handles the main game logic. This class handles the menu
  * interactions, keeping track of the state of the game, and determining a
  * winner.
  * </p>
  * 
- * <p>
  * 
+ * 
+ * <b>
+* Authors: Sean Cunningham, Samuel Gilchrist
+* </b>
+* <p>
+* Sean's KUID: 2935773
+* </p>
+* <p>
+* Sean's Email: s096c429@ku.edu
+* </p>
+* <p>
+* Sam's KUID: 2886577
+* </p>
+* <p>
+* Sam's Email: samofgil@ku.edu
+* </p>
  * @author Sean Cunningham
+ * <div>
  * @Sean_KUID 2935773
  * @Sean_Email s096c429@ku.edu
+ * </div>
  * 
  * @author Samuel Gilchrist
+ * <div>
  * @Sam_KUID 2886577
  * @Sam_Email samofgil@ku.edu
- *            </p>
+ * </div>
+ *            
  * 
  *            <p>
  *            <b> References: </b>
  *            </p>
  *            <ul>
- *            <li>https://www.tutorialspoint.com/java/java_documentation.html
+ *            <li> 
+ *            https://www.tutorialspoint.com/java/java_documentation.html
  *            </li>
  *            <li>
  *            https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html
@@ -37,46 +58,30 @@ import java.lang.IllegalArgumentException;
  *            https://beginnersbook.com/2013/12/java-string-charat-method-example/
  *            </li>
  *            </ul>
+ * 
+ * 
  *
  */
 public class Executive {
 
-  /**
-  * <p>
-  * consoleInput is the Scanner through which user input is read.
-  * </p>
-  */
   private Scanner consoleInput = new Scanner(System.in);
 
-  /**
-   * <p>
-   * coordinateLetters is an array of chars a - i which are used for mapping user
-   * input to coordinates.
-   * </p>
-   */
   private char[] coordinateLetters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' };
 
   /**
-    * Prints "Hello World!" to the console
-    * 
-    * <p>
-   * @pre: None
-   * @post: Print
-   *        how to call methods from other classes in Java.
-  * @param: None
-  * </p>
-  * 
-  */
+   * 
+   * Prints "Hello World!" to the console
+   * 
+   */
   public void helloWorld() {
     System.out.println("Hello world!");
   }
 
   /**
-   * @pre: None
-   * @post: Print
-    *        out of sight
-   * @param: None
-  */
+   *  
+   * Prints 50 newlines to the terminal to move any present text off screen.
+   * 
+   */
   public void clearTerminal() {
     for (int i = 0; i < 50; i++) {
       System.out.println("");
@@ -90,17 +95,18 @@ public class Executive {
    * 
    * 
    * <p>
+   * 
    * @pre: Must be surrounded by a try catch in any situations where the input
    *       parameter is not already validated
    * @param col The char input from the user representing a column on the board
    * @return Returns the position of the char within the array coordinateLetters
    * @throws IllegalArgumentException if the char cannot be found within the
-   *                                                                   coordinateLetters array, meaning that it is
+   *                                  coordinateLetters array, meaning that it is
    *                                  invalid input.
    * </p>
    * 
    */
-  private int letterToInt(char col) {
+  public int letterToInt(char col) {
     col = Character.toLowerCase(col);
     for (int i = 0; i < coordinateLetters.length; i++) {
       if (col == coordinateLetters[i]) {
@@ -114,11 +120,10 @@ public class Executive {
    * Displays the menu in the console.
    * 
    * @pre: Calling clearTerminal() beforehand is recommended, but not required
-   * @return None
    * @post: The menu will be displayed
    * 
    */
-  private void postMenu() {
+  public void postMenu() {
     System.out.println("Menu:");
     System.out.println("Type '1' to choose where to attack.");
     System.out.println("Type '2' to review your board.");
@@ -137,7 +142,7 @@ public class Executive {
    *         message to the console
    * 
    */
-  private boolean validateShipNum(int num) {
+  public boolean validateShipNum(int num) {
     if (num > 5 || num < 1) {
       System.out.println("Please input an int from 1 to 5.");
       return (false);
@@ -155,7 +160,7 @@ public class Executive {
    * @return The int provided by the user
    * 
    */
-  private int safelyGetIntInput() {
+  public int safelyGetIntInput() {
     boolean invalidInput = true;
     String input = "";
     int output = 0;
@@ -183,7 +188,7 @@ public class Executive {
    * @return The String containing the coordinates specified by the user
    * 
    */
-  private String safelyGetCoordinates() {
+  public String safelyGetCoordinates() {
     boolean invalidInput = true;
     String input = "";
     String output = "";
@@ -548,15 +553,17 @@ public class Executive {
    * This method determines whether a player has won the game. This is
    * accomplished by checking every space on the enemy player's board, and if
    * there are no remaining ships, then the game is over.
-   *  
-   *                   
    * 
-   *         
-   * @param enemyBoard  An instance of the Board class containing the enemy player's data
-   * @return False if the enemy has any remaining unsunk ships; Otherwise returns true
+   * 
+   * 
+   * 
+   * @param enemyBoard An instance of the Board class containing the enemy
+   *                   player's data
+   * @return False if the enemy has any remaining unsunk ships; Otherwise returns
+   *         true
    * 
    */
-  private boolean playerWon(Board enemyBoard) {
+  public boolean playerWon(Board enemyBoard) {
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
         if (enemyBoard.getMarker(i, j) == 's') {
@@ -570,19 +577,22 @@ public class Executive {
   /**
    * 
    * 
-   * This method attempts to place a ship of size shipSize onto the provided Board object.
-   *       
-   *                   
-   *    
-   * @param board An instance of the Board class on which the ship will be pla
-   *                   ed
-   * @param shipSize The size of the ship to place
-   *         
-   * @param shipNumber A word such as "first", "second", "third", etc... which describes to the user what number ship they are placing.
-   * @return True if the ship was successfully placed, false if the placement was impossible
+   * This method attempts to place a ship of size shipSize onto the provided Board
+   * object.
+   * 
+   * 
+   * 
+   * @param board      An instance of the Board class on which the ship will be
+   *                   pla ed
+   * @param shipSize   The size of the ship to place
+   * 
+   * @param shipNumber A word such as "first", "second", "third", etc... which
+   *                   describes to the user what number ship they are placing.
+   * @return True if the ship was successfully placed, false if the placement was
+   *         impossible
    * 
    */
-  private boolean placeShip(Board board, int shipSize, String shipNumber) {
+  public boolean placeShip(Board board, int shipSize, String shipNumber) {
     System.out.println("Where do you want to place the tip of your " + shipNumber + " ship? (A1-I9)? ");
     String input = safelyGetCoordinates(); // This validates the user input
     int col = letterToInt(input.charAt(0));
@@ -782,16 +792,16 @@ public class Executive {
 
   }
 
-  /** 
+  /**
    * 
-   * Prompts the user for a cardinal direction to orient their ship
-   * Continues to prompt the user until valid input is received.
+   * Prompts the user for a cardinal direction to orient their ship Continues to
+   * prompt the user until valid input is received.
    * 
    * 
    * @return A char representing the valid user input for ship orientation
    * 
    */
-  private char getValidShipDirection() {
+  public char getValidShipDirection() {
     String userInput = "";
     char dir = 'z';
     boolean dirInvalid = true;
