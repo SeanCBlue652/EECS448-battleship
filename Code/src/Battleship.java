@@ -14,7 +14,7 @@
 public class Battleship {
     public static void main(String[] args) {
         //This the the program's main
-        executive gameHandler = new executive();
+        Executive gameHandler = new Executive();
         gameHandler.run();
     }
 }

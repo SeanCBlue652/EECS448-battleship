@@ -2,58 +2,81 @@ import java.util.Scanner;
 import java.lang.IllegalArgumentException;
 
 /**
- * <
- * The executive class handles the main game logic. This class handles the menu
+ * 
+ * <p>
+ * The Executive class handles the main game logic. This class handles the menu
  * interactions, keeping track of the state of the game, and determining a
  * winner.
+ * </p>
  * 
- * @author: Sean Cunningham
- * @KUID: 2935773
- * @Email: s096c429@ku.edu
+ * <p>
  * 
- * @author: Samuel Gilchrist
- * @KUID:  2886577
- * @Email:  samofgil@ku.edu
+ * @author Sean Cunningham
+ * @Sean_KUID 2935773
+ * @Sean_Email s096c429@ku.edu
  * 
- * <p> <b> References: </b> </p>
-* <ul>
-* <li> https://www.tutorialspoint.com/java/java_documentation.html </li>
-* <li> https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html </li>
-* <li> https://www.quora.com/What-function-do-we-use-in-Java-in-place-of-cin-in-C++ </li>
-* <li> https://www.javatpoint.com/java-char-to-int </li>
-* <li> https://beginnersbook.com/2013/12/java-string-charat-method-example/ <li>
-* </ul>
-
+ * @author Samuel Gilchrist
+ * @Sam_KUID 2886577
+ * @Sam_Email samofgil@ku.edu
+ *            </p>
+ * 
+ *            <p>
+ *            <b> References: </b>
+ *            </p>
+ *            <ul>
+ *            <li>https://www.tutorialspoint.com/java/java_documentation.html
+ *            </li>
+ *            <li>
+ *            https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html
+ *            </li>
+ *            <li>
+ *            https://www.quora.com/What-function-do-we-use-in-Java-in-place-of-cin-in-C++
+ *            </li>
+ *            <li>https://www.javatpoint.com/java-char-to-int</li>
+ *            <li>
+ *            https://beginnersbook.com/2013/12/java-string-charat-method-example/
+ *            </li>
+ *            </ul>
+ *
  */
-class executive {
+public class Executive {
 
   /**
-   * consoleInput is the Scanner through which user input is read.
-   */
+  * <p>
+  * consoleInput is the Scanner through which user input is read.
+  * </p>
+  */
   private Scanner consoleInput = new Scanner(System.in);
 
   /**
+   * <p>
    * coordinateLetters is an array of chars a - i which are used for mapping user
    * input to coordinates.
+   * </p>
    */
   private char[] coordinateLetters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' };
 
   /**
+    * Prints "Hello World!" to the console
+    * 
+    * <p>
    * @pre: None
-   * @post: Prints "Hello World". This method provides an example to the team of
+   * @post: Print
    *        how to call methods from other classes in Java.
-   * @param: None
-   */
+  * @param: None
+  * </p>
+  * 
+  */
   public void helloWorld() {
     System.out.println("Hello world!");
   }
 
   /**
    * @pre: None
-   * @post: Prints 50 newlines to the terminal in order to move previous messages
-   *        out of sight
+   * @post: Print
+    *        out of sight
    * @param: None
-   */
+  */
   public void clearTerminal() {
     for (int i = 0; i < 50; i++) {
       System.out.println("");
@@ -65,13 +88,16 @@ class executive {
    * Used to convert letters to ints, used when given coordinates in (A1-I9) form
    * 
    * 
+   * 
+   * <p>
    * @pre: Must be surrounded by a try catch in any situations where the input
    *       parameter is not already validated
    * @param col The char input from the user representing a column on the board
    * @return Returns the position of the char within the array coordinateLetters
    * @throws IllegalArgumentException if the char cannot be found within the
-   *                                  coordinateLetters array, meaning that it is
+   *                                                                   coordinateLetters array, meaning that it is
    *                                  invalid input.
+   * </p>
    * 
    */
   private int letterToInt(char col) {
@@ -522,8 +548,10 @@ class executive {
    * This method determines whether a player has won the game. This is
    * accomplished by checking every space on the enemy player's board, and if
    * there are no remaining ships, then the game is over.
+   *  
+   *                   
    * 
-   * 
+   *         
    * @param enemyBoard  An instance of the Board class containing the enemy player's data
    * @return False if the enemy has any remaining unsunk ships; Otherwise returns true
    * 
@@ -541,11 +569,15 @@ class executive {
 
   /**
    * 
+   * 
    * This method attempts to place a ship of size shipSize onto the provided Board object.
-   * 
-   * 
-   * @param board An instance of the Board class on which the ship will be placed
+   *       
+   *                   
+   *    
+   * @param board An instance of the Board class on which the ship will be pla
+   *                   ed
    * @param shipSize The size of the ship to place
+   *         
    * @param shipNumber A word such as "first", "second", "third", etc... which describes to the user what number ship they are placing.
    * @return True if the ship was successfully placed, false if the placement was impossible
    * 
@@ -750,7 +782,7 @@ class executive {
 
   }
 
-  /**
+  /** 
    * 
    * Prompts the user for a cardinal direction to orient their ship
    * Continues to prompt the user until valid input is received.

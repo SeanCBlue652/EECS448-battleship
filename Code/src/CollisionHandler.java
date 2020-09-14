@@ -46,12 +46,15 @@ public class CollisionHandler {
 	* <p>
 	*	Must have valid Board and marker
 	* </p>
+	* <p>
 	* @param g Board
 	*	@param marker Char
 	* @param x Int
 	* @param y Int
 	*	@return Boolean
 	* @throws IllegalArgumentException iae
+	* </p>
+	*
 	*/
 	public static boolean check(Board g, char marker, int x, int y){
 		if(x < 0 || y < 0 || x >= g.getXSize() || y >= g.getYSize()){
