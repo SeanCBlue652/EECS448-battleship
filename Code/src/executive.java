@@ -2,13 +2,28 @@ import java.util.Scanner;
 import java.lang.IllegalArgumentException;
 
 /**
- * @Name: Sean Cunningham
+ * 
+ * The executive class handles the main game logic.
+ * This class handles the menu interactions, keeping track of the state of the game, and determining a winner.
+ * 
+ * @author: Sean Cunningham
  * @KUID: 2935773
  * @Email: s096c429@ku.edu
+ * 
+ * @author: Samuel Gilchrist
+ * @KUID: 
+ * @Email: 
  */
 class executive {
 
+  /**
+   * consoleInput is the Scanner through which user input is read.
+   */
   private Scanner consoleInput = new Scanner(System.in);
+
+  /**
+   * coordinateLetters is an array of chars a - i which are used for mapping user input to coordinates.
+   */
   private char[] coordinateLetters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' };
 
   /**
@@ -33,7 +48,15 @@ class executive {
     }
   }
 
-  // Used to convert letters to ints, used when given coordinates in (A1-I9) form
+  /**
+   * 
+   * Used to convert letters to ints, used when given coordinates in (A1-I9) form
+   * 
+   * 
+   * @param col  The char input from the user representing a column on the board
+   * @return Returns the position of the char within the array coordinateLetters
+   * @throws IllegalArgumentException if the char cannot be found within the coordinateLetters array, meaning that it is invalid input.
+   */
   private int letterToInt(char col) {
     col = Character.toLowerCase(col);
     for (int i = 0; i < coordinateLetters.length; i++) {
