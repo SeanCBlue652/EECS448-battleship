@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.lang.IllegalArgumentException;
 
 /**
- * 
+ * <
  * The executive class handles the main game logic. This class handles the menu
  * interactions, keeping track of the state of the game, and determining a
  * winner.
@@ -12,8 +12,18 @@ import java.lang.IllegalArgumentException;
  * @Email: s096c429@ku.edu
  * 
  * @author: Samuel Gilchrist
- * @KUID:
- * @Email:
+ * @KUID:  
+ * @Email:  samofgil@ku.edu
+ * 
+ * <p> <b> References: </b> </p>
+* <ul>
+* <li> https://www.tutorialspoint.com/java/java_documentation.html </li>
+* <li> https://docs.oracle.com/javase/8/docs/technotes/tools/winodws/javadoc.html </li>
+* <li> https://www.quora.com/What-function-do-we-use-in-Java-in-place-of-cin-in-C++ </li>
+* <li> https://www.javatpoint.com/java-char-to-int </li>
+* <li> https://beginnersbook.com/2013/12/java-string-charat-method-example/ <li>
+* </ul>
+
  */
 class executive {
 
@@ -513,6 +523,7 @@ class executive {
    * accomplished by checking every space on the enemy player's board, and if
    * there are no remaining ships, then the game is over.
    * 
+   * 
    * @param enemyBoard  An instance of the Board class containing the enemy player's data
    * @return False if the enemy has any remaining unsunk ships; Otherwise returns true
    * 
@@ -528,6 +539,17 @@ class executive {
     return (true);
   }
 
+  /**
+   * 
+   * This method attempts to place a ship of size shipSize onto the provided Board object.
+   * 
+   * 
+   * @param board An instance of the Board class on which the ship will be placed
+   * @param shipSize The size of the ship to place
+   * @param shipNumber A word such as "first", "second", "third", etc... which describes to the user what number ship they are placing.
+   * @return True if the ship was successfully placed, false if the placement was impossible
+   * 
+   */
   private boolean placeShip(Board board, int shipSize, String shipNumber) {
     System.out.println("Where do you want to place the tip of your " + shipNumber + " ship? (A1-I9)? ");
     String input = safelyGetCoordinates(); // This validates the user input
@@ -728,6 +750,15 @@ class executive {
 
   }
 
+  /**
+   * 
+   * Prompts the user for a cardinal direction to orient their ship
+   * Continues to prompt the user until valid input is received.
+   * 
+   * 
+   * @return A char representing the valid user input for ship orientation
+   * 
+   */
   private char getValidShipDirection() {
     String userInput = "";
     char dir = 'z';
@@ -763,8 +794,3 @@ class executive {
     return (dir);
   }
 }
-
-// references:
-// https://www.quora.com/What-function-do-we-use-in-Java-in-place-of-cin-in-C++
-// ref: https://www.javatpoint.com/java-char-to-int
-// ref: https://beginnersbook.com/2013/12/java-string-charat-method-example/

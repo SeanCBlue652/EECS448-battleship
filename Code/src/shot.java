@@ -1,6 +1,16 @@
 //import java.util.Scanner;
+/**
+ * @author: Yang Tao
+ * @KUID:
+ * @email: 
+ * 
+ */
 public class shot
 {
+    /**
+     * Shoot method for shot class
+     * @param arg
+     */
     public static void  shoot (String [] arg)
     {
         /*
