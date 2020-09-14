@@ -155,7 +155,7 @@ public class Board {
 		Board copy = new Board(this.xSize, this.ySize, this.board_marker);
 		for (int i = 0; i < this.ySize; i++) {
 			for (int k = 0; k < this.xSize; k++) {
-				copy.addMarker(this.map[i][k], k, i);
+				copy.addMarker(this.map[i][k], i, k);
 			}
 		}
 		return copy;

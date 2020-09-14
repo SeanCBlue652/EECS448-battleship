@@ -93,11 +93,11 @@ public class BoardPrinterWrapper{
       for(int i = -1; i < g.getYSize(); i++){
         for(int k = -1; k < g.getXSize(); k++){
           if(i == -1 && indexed){
-            ui.addMarker(x_ui, k + xInput, i + yInput);
+          ui.addMarker(x_ui, k + xInput, i + yInput);
             x_ui ++;
           }
           else if(k == -1 && indexed){
-            ui.addMarker(y_ui, k + xInput, i + yInput);
+           ui.addMarker(y_ui, k + xInput, i + yInput);
             y_ui++;
           }
         }
@@ -165,7 +165,7 @@ public class BoardPrinterWrapper{
     Board copy = new Board(ui.getXSize(), ui.getYSize(), this.board_marker);
     for(int i = 0; i < ui.getYSize(); i++){
       for(int k = 0; k < ui.getXSize(); k++){
-        copy.addMarker(ui.getMarker(k, i), k, i);
+        copy.addMarker(ui.getMarker(k , i), k, i);
       }
     }
     return copy;
