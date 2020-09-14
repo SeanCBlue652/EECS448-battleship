@@ -46,6 +46,10 @@ public class CollisionHandler {
 	* <p>
 	*	Must have valid Board and marker
 	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Checks the board against the marker and returns when true when detected
+	* </p>
 	* @param g Board
 	*	@param marker Char
 	* @param x Int

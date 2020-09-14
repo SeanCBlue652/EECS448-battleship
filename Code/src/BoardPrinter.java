@@ -31,6 +31,10 @@ public class BoardPrinter{
 	* <p>
 	*	Must have valid Board Object
 	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Outputs the board to the console
+	* </p>
 	*	@param g Board
 	*/
 	public static void printBoard(Board g){
@@ -48,6 +52,10 @@ public class BoardPrinter{
 	* <p> <b> Preconditions: </b> </p>
 	* <p>
 	*	Must have valid Board Object and remove_character
+	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Outputs the board to the console
 	* </p>
 	* @param g Board
 	* @param remove_marker char

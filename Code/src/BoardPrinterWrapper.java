@@ -48,6 +48,10 @@ public class BoardPrinterWrapper{
   * <p>
   *	Must have valid Board Object and characters and a indexed boolean
   * </p>
+  * <p> <b> Postconditions: </b> </p>
+  * <p>
+  * Creates a board with new offsets for output
+  * </p>
   * @param t_g Bpard
   * @param t_ship_marker char
   * @param t_board_marker char
@@ -71,6 +75,10 @@ public class BoardPrinterWrapper{
   * <p> <b> Preconditions: </b> </p>
   * <p>
   *	Must have been constructed
+  * </p>
+  * <p> <b> Postconditions: </b> </p>
+  * <p>
+  * Updates offset board with new g board
   * </p>
   */
   private void addBoard(){
@@ -111,6 +119,10 @@ public class BoardPrinterWrapper{
   * <p>
   *	Must have character and valid address
   * </p>
+  * <p> <b> Postconditions: </b> </p>
+  * <p>
+  * Alters the offset board, temp.
+  * </p>
   * @param marker char
   * @param x Int
   * @param y Int
@@ -125,6 +137,10 @@ public class BoardPrinterWrapper{
   * <p>
   *	Must have valid address
   * </p>
+  * <p> <b> Postconditions: </b> </p>
+  * <p>
+  * Gets an element from the offset board
+  * </p>
   * @param x Int
   * @param y Int
   * @return char element
@@ -138,6 +154,10 @@ public class BoardPrinterWrapper{
   * <p> <b> Preconditions: </b> </p>
   * <p>
   *	Must have been constructed
+  * </p>
+  * <p> <b> Postconditions: </b> </p>
+  * <p>
+  * Returns a copy of the board by a new Board Object
   * </p>
   * @return Board offsetBoard
   */
@@ -156,6 +176,10 @@ public class BoardPrinterWrapper{
   * <p> <b> Preconditions: </b> </p>
   * <p>
   *	Must have valid boolean character and constructed
+  * </p>
+  * <p> <b> Postconditions: </b> </p>
+  * <p>
+  * Prints the board, this is the output.
   * </p>
   * @param t_hidden boolean
   */

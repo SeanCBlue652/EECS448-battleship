@@ -49,6 +49,10 @@ public class Board{
 	* <p>
 	*	Must have strictly positive x and y
 	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Makes a map with x and y dimensions
+	* </p>
 	*	@param x Int
 	* @param y Int
 	* @param t_board_marker Char
@@ -77,6 +81,10 @@ public class Board{
 	* <p>
 	*	Must have been constructed
 	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Returns this.map Object
+	* </p>
 	*	@return char[][]
 	*/
 	public char[][] getBoard(){
@@ -88,6 +96,10 @@ public class Board{
 	* <p> <b> Preconditions: </b> </p>
 	* <p>
 	*	Must have been constructed
+	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Returns a copy of this.map with char[][] copy
 	* </p>
 	*	@return char[][]
 	*/
@@ -105,6 +117,10 @@ public class Board{
 	* <p> <b> Preconditions: </b> </p>
 	* <p>
 	*	Must have been constructed
+	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Returns a copy of this object with Board
 	* </p>
 	*	@return Board
 	*/
@@ -124,6 +140,10 @@ public class Board{
 	* <p>
 	*	Must have been constructed
 	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Returns the x dimension
+	* </p>
 	*	@return int
 	*/
 	public int getXSize(){
@@ -135,6 +155,10 @@ public class Board{
 	* <p> <b> Preconditions: </b> </p>
 	* <p>
 	*	Must have been constructed
+	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Returns the y dimension
 	* </p>
 	*	@return int
 	*/
@@ -148,6 +172,10 @@ public class Board{
 	* <p>
 	*	Must have been constructed
 	* Must have valid address
+	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Adds a character to the map Object
 	* </p>
 	* @param marker Char
 	* @param x Int
@@ -163,6 +191,10 @@ public class Board{
 	* <p>
 	*	Must have been constructed
 	* Must have valid address
+	* </p>
+	* <p> <b> Postconditions: </b> </p>
+	* <p>
+	* Returns a character from a (x,y) position of map
 	* </p>
 	* @param x Int
 	* @param y Int
