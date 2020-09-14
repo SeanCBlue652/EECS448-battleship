@@ -1,8 +1,9 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 public class shot
 {
-    public static void  shot (String [] arg)
+    public static void  shoot (String [] arg)
     {
+        /*
         Board ();
         Scanner sc = new Scanner(System.in);
         System.out.print ("Input your x axis of your shoting: ");
@@ -41,6 +42,8 @@ public class shot
                 }
             }
         }
+        */
     }
+    
 
 }
